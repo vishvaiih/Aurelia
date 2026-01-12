@@ -1,42 +1,41 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+*{
+  margin: 0px;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.header{
+  width: 100%;
+  height:75px;
+  border:2px solid black;
+  display: flex;
+  align-items: center;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.Aurelia{
+  font-size: 26px !important;
+  color:#dbb658;
+  font-family: serif !important; 
+  letter-spacing: 2px !important;
+  font-weight: 300;
+
+  
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.menu{
+  display: flex;
+  margin-left: 32px;
+  align-items: center;
+  color:#85827f;
+  font-weight: 900;
+  font-family: serif;
+ 
 }
 
-.card {
-  padding: 2em;
+.margin{
+  margin: 60px;
+  display: flex;
 }
 
-.read-the-docs {
-  color: #888;
+.perticularmenu{
+  font-size: 13px !important;
+  margin-right: 19px !important;
 }
