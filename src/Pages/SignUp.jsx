@@ -8,8 +8,13 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Checkbox from "@mui/material/Checkbox";
 import { orange } from "@mui/material/colors";
+import { useNavigate } from "react-router-dom";
+import { useFormik } from 'formik';
+import * as yup from 'yup';
 
 function SignUp() {
+    const navigation = useNavigate();
+
   const [showPassword, setShowPassword] = React.useState(false);
 
   const label = { slotProps: { input: { "aria-label": "Checkbox demo" } } };
@@ -23,6 +28,45 @@ function SignUp() {
   const handleMouseUpPassword = (event) => {
     event.preventDefault();
   };
+
+
+  const createAccount = () => {
+    console.log("......");
+  }
+
+  const validationSchema = yup.object({
+    firstname: yup.string('Enter your firstname').required('Firstname is required'),
+    lastname:yup.string('Enter your lastname').required('Lastname is required'),
+    email: yup
+      .string('Enter your email')
+      .email('Enter a valid email')
+      .required('Email is required'),
+    password: yup
+      .string('Enter your password')
+      .min(8, 'Password should be of minimum 8 characters length')
+      .required('Password is required'),
+    confirmpassword: yup
+    .string('Enter your password')
+    .min(8, 'Password should be of minimum 8 characters length')
+    .required('Password is required'),
+  });
+
+  
+    const formik = useFormik({
+      initialValues: {
+        firstname:"",
+        lastname:"",
+        email: "",
+        password: "",
+        confirmpassword:""
+      },
+      validationSchema: validationSchema,
+      onSubmit: (values) => {
+        alert(JSON.stringify(values, null, 2));
+      },
+    });
+
+  
 
   return (
     <>
@@ -74,6 +118,7 @@ function SignUp() {
               </Typography>
               <TextField
                 label="First Name"
+                name="firstname"
                 type="text"
                 sx={{
                   "& .MuiInputBase-input": {
@@ -82,6 +127,11 @@ function SignUp() {
                     paddingBottom: "0px",
                   },
                 }}
+                value={formik.values.firstname}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={formik.touched.firstname && Boolean(formik.errors.firstname)}
+                helperText={formik.touched.firstname && formik.errors.firstname}
               />
             </Box>
 
@@ -89,10 +139,11 @@ function SignUp() {
               <Typography
                 sx={{ fontSize: "14px", color: "#45413e", fontWeight: "500" }}
               >
-                First Name
+                Last Name
               </Typography>
               <TextField
                 label="Last Name"
+                name="lastname"
                 type="text"
                 sx={{
                   "& .MuiInputBase-input": {
@@ -101,6 +152,11 @@ function SignUp() {
                     paddingBottom: "0px",
                   },
                 }}
+                value={formik.values.lastname}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={formik.touched.lastname && Boolean(formik.errors.lastname)}
+                helperText={formik.touched.lastname && formik.errors.lastname}
               />
             </Box>
           </Box>
@@ -118,17 +174,22 @@ function SignUp() {
               Email
             </Typography>
             <TextField
-            fullWidth
+              fullWidth
               label="Email"
+              name="email"
               type="text"
               sx={{
                 "& .MuiInputBase-input": {
                   height: "46px",
                   paddingTop: "0px",
                   paddingBottom: "0px",
-                 
                 },
               }}
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.email && Boolean(formik.errors.email)}
+              helperText={formik.touched.email && formik.errors.email}
             />
           </Box>
 
@@ -145,7 +206,9 @@ function SignUp() {
               Password
             </Typography>
             <OutlinedInput
-            fullWidth
+            name="password"
+              label="Password"
+              fullWidth
               sx={{
                 "& .MuiInputBase-input": {
                   height: "46px",
@@ -172,7 +235,11 @@ function SignUp() {
                   </IconButton>
                 </InputAdornment>
               }
-              label="Password"
+              value={formik.values.password}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.password && Boolean(formik.errors.password)}
+              helperText={formik.touched.password && formik.errors.password}
             />
           </Box>
 
@@ -209,8 +276,9 @@ function SignUp() {
               Confirm Password
             </Typography>
             <TextField
-            fullWidth
-              label="Email"
+              name="confirmpassword"
+              fullWidth
+              label="Password"
               type="text"
               sx={{
                 "& .MuiInputBase-input": {
@@ -220,6 +288,11 @@ function SignUp() {
                   width: "100%",
                 },
               }}
+              value={formik.values.confirmpassword}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.confirmpassword && Boolean(formik.errors.confirmpassword)}
+              helperText={formik.touched.confirmpassword && formik.errors.confirmpassword}
             />
           </Box>
 
@@ -248,33 +321,35 @@ function SignUp() {
             </Typography>
           </Box>
 
-        
-        <Box sx={{display:"flex",justifyContent:"center"}}> 
-
-        <Button
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <Button
+             onClick = {() => createAccount()}
               sx={{
-                fontSize: "13px",
+                fontSize: "16px",
                 color: "#2a2622",
-                textTransform: "lowercase",
+                textTransform: "capitalize",
                 border: "1px solid #b68a1b",
                 backgroundColor: "#d9a930",
                 width: "65%",
                 height: "46px",
-                margin:"10px"
-                
+                margin: "10px",
               }}
             >
               Create Account
             </Button>
-        </Box>
-        
-        <Box sx={{display:"flex",margin:"18px",justifyContent:"center"}}>
-            <Typography sx={{color:"#867767"}}> Already have an account?</Typography>
-            <Typography>Sign in</Typography>
-           
-        </Box>
-           
-          
+          </Box>
+
+          <Box
+            sx={{ display: "flex", margin: "18px", justifyContent: "center" }}
+          >
+            <Typography sx={{ color: "#867767" }}>
+              {" "}
+              Already have an account?
+            </Typography>
+            <Typography onClick={() => navigation("/login")} sx={{ color: "#d9a520", fontWeight: "500",cursor:"pointer" }}>
+              Sign in
+            </Typography>
+          </Box>
         </Box>
       </Box>
     </>

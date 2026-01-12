@@ -3,7 +3,8 @@ import Box from "@mui/material/Box";
 import { Button, Typography } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 
 function Header() {
 
@@ -27,7 +28,7 @@ function Header() {
         <Box className="icon">
           <SearchIcon className="iconmargin"/>
           <FavoriteBorderOutlinedIcon className="iconmargin" />
-          <FavoriteBorderOutlinedIcon  className="iconmargin"/>
+          <LocalMallOutlinedIcon  className="iconmargin"/>
          
              <Button className="Signinbtn" onClick={() => navigation("/login")}>Sign In</Button>
          
