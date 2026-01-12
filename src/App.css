@@ -20,6 +20,7 @@
   color:#55524e !important;
   font-weight: 900 !important;
   font-family: serif;
+
  
 }
 
@@ -36,6 +37,7 @@
 .perticularmenu{
   font-size: 14px !important;
   margin-right: 19px !important;
+ 
 }
 
 .icon{
@@ -57,6 +59,11 @@
   text-transform: initial !important;
   border-radius: 7px !important;
   font-weight: 600;
+}
+
+.Signinbtn:hover{
+  background-color:#dcac31 ;
+  color:white !important;
 }
 
 
