@@ -2,13 +2,6 @@
   margin: 0px;
 }
 
-.header{
-  width: 100%;
-  height:75px;
-  border:2px solid black;
-  display: flex;
-  align-items: center;
-}
 
 .Aurelia{
   font-size: 26px !important;
@@ -24,10 +17,15 @@
   display: flex;
   margin-left: 32px;
   align-items: center;
-  color:#85827f;
-  font-weight: 900;
+  color:#55524e !important;
+  font-weight: 900 !important;
   font-family: serif;
  
+}
+
+.Home{
+  color: #deb240 !important;
+  font-weight: 600 !important;
 }
 
 .margin{
@@ -36,6 +34,30 @@
 }
 
 .perticularmenu{
-  font-size: 13px !important;
+  font-size: 14px !important;
   margin-right: 19px !important;
 }
+
+.icon{
+  margin-right: 55px;
+  display: flex;
+  align-items: center;
+}
+
+.iconmargin{
+  margin-right:20px;
+  font-size: 18px !important;
+}
+
+.Signinbtn{
+  color:#dcac31 !important;
+  border: 1px solid  #dcac31 !important ;
+  padding: 4px 0px!important;
+  font-size: 12px !important;
+  text-transform: initial !important;
+  border-radius: 7px !important;
+  font-weight: 600;
+}
+
+
+
