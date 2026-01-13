@@ -49,7 +49,18 @@ function SignInCom() {
            const filterDataByEmail = getItem?.find((i) => i.email == values.email)
            console.log("filterDataByEmail",filterDataByEmail);
 
-          
+           if(filterDataByEmail){
+             if(filterDataByEmail?.password === values?.password){
+                localStorage.setItem("userDetail",JSON.stringify(filterDataByEmail.id))
+                toast.success("logIn successfully")
+             }else{
+                toast.error("password is wrong")
+             }
+           }else{
+             toast.error("user not found")
+           }
+
+
         }});
 
   return (

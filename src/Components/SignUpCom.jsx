@@ -62,6 +62,7 @@ function SignUpCom() {
     
       const formik = useFormik({
         initialValues: {
+            
           firstname: "",
           lastname: "",
           email: "",
@@ -86,8 +87,17 @@ function SignUpCom() {
           }
     
           console.log("values", values);
+
+          const  newUser = {
+            ...values,
+            id: Math.random() * Math.pow(5,6)
+          }
     
-          setData((prev) => [...prev, values]);
+          setData((prev) => [...prev, newUser]);
+
+          toast.success("Sign Up Successfully");
+
+         
         },
       });
     
@@ -96,6 +106,8 @@ function SignUpCom() {
           localStorage.setItem("data", JSON.stringify(data));
         }
       }, [data]);
+
+      
     
 
 
