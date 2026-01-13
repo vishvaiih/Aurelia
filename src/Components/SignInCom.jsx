@@ -46,12 +46,12 @@ function SignInCom() {
            let getItem = JSON.parse(localStorage.getItem("data"))
            console.log("getItem",getItem);
 
-           const filterDataByEmail = getItem?.find((i) => i.email == values.email)
+           const filterDataByEmail = getItem?.find((i) => i?.email == values.email)
            console.log("filterDataByEmail",filterDataByEmail);
 
            if(filterDataByEmail){
-             if(filterDataByEmail?.password === values?.password){
-                localStorage.setItem("userDetail",JSON.stringify(filterDataByEmail.id))
+             if(filterDataByEmail?.password === values.password){
+                localStorage.setItem("userDetail",JSON.stringify(filterDataByEmail?.id))
                 toast.success("logIn successfully")
              }else{
                 toast.error("password is wrong")
@@ -59,8 +59,7 @@ function SignInCom() {
            }else{
              toast.error("user not found")
            }
-
-
+            
         }});
 
   return (
@@ -79,7 +78,7 @@ function SignInCom() {
         </Typography>
         <TextField
           fullWidth
-          label="Email"
+          placeholder="Email"
           name="email"
           type="text"
           sx={{
@@ -87,6 +86,7 @@ function SignInCom() {
               height: "46px",
               paddingTop: "0px",
               paddingBottom: "0px",
+              boxShadow:"0px 0px 4px 0px #e0dbd1"
             },
           }}
             value={formik.values.email}
@@ -111,13 +111,14 @@ function SignInCom() {
         </Typography>
         <TextField
           name="password"
-          label="Password"
+          placeholder="Password"
           fullWidth
           sx={{
             "& .MuiInputBase-input": {
               height: "46px",
               paddingTop: "0px",
               paddingBottom: "0px",
+              boxShadow:"0px 0px 4px 0px #e0dbd1"
             },
           }}
           id="outlined-adornment-password"

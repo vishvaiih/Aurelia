@@ -13,11 +13,12 @@ import { orange } from "@mui/material/colors";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 
 function SignUpCom() {
 
-     
+     const navigation = useNavigate();
 
     const [showPassword, setShowPassword] = useState(false);
       const [data, setData] = useState(() => {
@@ -97,6 +98,7 @@ function SignUpCom() {
 
           toast.success("Sign Up Successfully");
 
+          navigation("/login");
          
         },
       });
@@ -106,9 +108,6 @@ function SignUpCom() {
           localStorage.setItem("data", JSON.stringify(data));
         }
       }, [data]);
-
-      
-    
 
 
   return (
@@ -130,7 +129,8 @@ function SignUpCom() {
                 First Name
               </Typography>
               <TextField
-                label="First Name"
+               color="warning"
+              placeholder="First Name"
                 name="firstname"
                 type="text"
                 sx={{
@@ -138,6 +138,7 @@ function SignUpCom() {
                     height: "46px",
                     paddingTop: "0px",
                     paddingBottom: "0px",
+                   boxShadow:"0px 0px 4px 0px #e0dbd1"
                   },
                 }}
                 value={formik.values.firstname}
@@ -157,7 +158,7 @@ function SignUpCom() {
                 Last Name
               </Typography>
               <TextField
-                label="Last Name"
+                placeholder="Last Name"
                 name="lastname"
                 type="text"
                 sx={{
@@ -165,6 +166,7 @@ function SignUpCom() {
                     height: "46px",
                     paddingTop: "0px",
                     paddingBottom: "0px",
+                    boxShadow:"0px 0px 4px 0px #e0dbd1"
                   },
                 }}
                 value={formik.values.lastname}
@@ -192,7 +194,7 @@ function SignUpCom() {
             </Typography>
             <TextField
               fullWidth
-              label="Email"
+              placeholder="Email"
               name="email"
               type="text"
               sx={{
@@ -200,6 +202,7 @@ function SignUpCom() {
                   height: "46px",
                   paddingTop: "0px",
                   paddingBottom: "0px",
+                  boxShadow:"0px 0px 4px 0px #e0dbd1"
                 },
               }}
               value={formik.values.email}
@@ -224,13 +227,14 @@ function SignUpCom() {
             </Typography>
             <TextField
               name="password"
-              label="Password"
+              placeholder="Password"
               fullWidth
               sx={{
                 "& .MuiInputBase-input": {
                   height: "46px",
                   paddingTop: "0px",
                   paddingBottom: "0px",
+                  boxShadow:"0px 0px 4px 0px #e0dbd1"
                 },
               }}
               id="outlined-adornment-password"
@@ -279,7 +283,7 @@ function SignUpCom() {
             <TextField
               name="confirmpassword"
               fullWidth
-              label="Password"
+              placeholder="Password"
               type={showPassword ? "text" : "password"}
               sx={{
                 "& .MuiInputBase-input": {
@@ -287,6 +291,7 @@ function SignUpCom() {
                   paddingTop: "0px",
                   paddingBottom: "0px",
                   width: "100%",
+                  boxShadow:"0px 0px 4px 0px #e0dbd1"
                 },
               }}
               value={formik.values.confirmpassword}
@@ -322,9 +327,7 @@ function SignUpCom() {
               }}
             />
             <Typography sx={{ fontSize: "15px", color: "#2a2622" }}>
-              I agree to the
-              <span style={{ color: "#d9a527" }}>Terms of Service</span> and
-              <span style={{ color: "#d9a527" }}>Privacy Policy</span>
+              I agree to the <span style={{ color: "#d9a527" }}>Terms of Service</span> and <span style={{ color: "#d9a527" }}>Privacy Policy</span>
             </Typography>
           </Box>
 
