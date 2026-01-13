@@ -5,7 +5,7 @@ function Banner() {
   return (
     <>
        <Box >
-            <img src="./images/banner.png" style={{height:"550px",width:"100%" }}></img>
+            <img src="./images/banner.png" style={{height:"600px",width:"100%" }}></img>
 
        </Box>
     

@@ -1,7 +1,7 @@
 import { Box, Button, Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
-import OutlinedInput from "@mui/material/OutlinedInput";
+
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
 import Visibility from "@mui/icons-material/Visibility";
@@ -9,13 +9,22 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Checkbox from "@mui/material/Checkbox";
 import { orange } from "@mui/material/colors";
 import { useNavigate } from "react-router-dom";
-import { useFormik } from 'formik';
-import * as yup from 'yup';
+import { useFormik } from "formik";
+import * as yup from "yup";
+import { toast } from "react-toastify";
 
 function SignUp() {
-    const navigation = useNavigate();
+  const navigation = useNavigate();
 
-  const [showPassword, setShowPassword] = React.useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [data, setData] = useState(() => {
+    let getItem =  JSON.parse(localStorage.getItem("data")) || [];
+    return getItem;
+  }
+   
+  );
+  const [checked, setChecked] = useState(false);
+  console.log("checked",checked)
 
   const label = { slotProps: { input: { "aria-label": "Checkbox demo" } } };
 
@@ -29,59 +38,80 @@ function SignUp() {
     event.preventDefault();
   };
 
-
-  const createAccount = () => {
-    console.log("......");
-  }
-
   const validationSchema = yup.object({
-    firstname: yup.string('Enter your firstname').required('Firstname is required'),
-    lastname:yup.string('Enter your lastname').required('Lastname is required'),
+    firstname: yup
+      .string("Enter your firstname")
+      .required("Firstname is required"),
+    lastname: yup
+      .string("Enter your lastname")
+      .required("Lastname is required"),
     email: yup
-      .string('Enter your email')
-      .email('Enter a valid email')
-      .required('Email is required'),
+      .string("Enter your email")
+      .email("Enter a valid email")
+      .required("Email is required"),
     password: yup
-      .string('Enter your password')
-      .min(8, 'Password should be of minimum 8 characters length')
-      .required('Password is required'),
+      .string("Enter your password")
+      .min(8, "Password should be of minimum 8 characters length")
+      .required("Password is required"),
     confirmpassword: yup
-    .string('Enter your password')
-    .min(8, 'Password should be of minimum 8 characters length')
-    .required('Password is required'),
+      .string("Enter your password")
+      .oneOf([yup.ref("password")], "password is not metched")
+      .required(" password is required"),
   });
 
-  
-    const formik = useFormik({
-      initialValues: {
-        firstname:"",
-        lastname:"",
-        email: "",
-        password: "",
-        confirmpassword:""
-      },
-      validationSchema: validationSchema,
-      onSubmit: (values) => {
-        alert(JSON.stringify(values, null, 2));
-      },
-    });
+  const formik = useFormik({
+    initialValues: {
+      firstname: "",
+      lastname: "",
+      email: "",
+      password: "",
+      confirmpassword: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+     
+      if(checked == false){
+         toast.error("Accept terms and condition")
+          return;
+      }
 
-  
+      let data = JSON.parse(localStorage.getItem("data"));
+
+      let filterData = data?.find((i) =>i?.email == values?.email)
+      console.log("filterData",filterData)
+
+
+      if(filterData){
+        toast.error("Email is already exist")
+        return;
+      }
+
+      console.log("values", values);
+
+      setData((prev) => [...prev, values]);
+    },
+  });
+
+  useEffect(() => {
+    if (data.length > 0) {
+      localStorage.setItem("data", JSON.stringify(data));
+    }
+  }, [data]);
 
   return (
     <>
       <Box sx={{ display: "flex", height: "auto" }}>
-        <Box sx={{ width: "50%", height: "700px" }}>
+        <Box sx={{ width: "50%" }}>
           <img
             src="./images/signup.png"
-            style={{ width: "100%", height: "700px" }}
+            style={{ width: "100%", height: "100%" }}
           />
         </Box>
-        <Box sx={{ width: "50%" }}>
+        <Box sx={{ width: "50%", height: "110vh" }}>
           <Box
             sx={{
               margin: "75px auto 32px",
-              heigth: "auto",
+              heigth: "110vh",
               width: "65%",
             }}
           >
@@ -130,7 +160,9 @@ function SignUp() {
                 value={formik.values.firstname}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                error={formik.touched.firstname && Boolean(formik.errors.firstname)}
+                error={
+                  formik.touched.firstname && Boolean(formik.errors.firstname)
+                }
                 helperText={formik.touched.firstname && formik.errors.firstname}
               />
             </Box>
@@ -155,7 +187,9 @@ function SignUp() {
                 value={formik.values.lastname}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                error={formik.touched.lastname && Boolean(formik.errors.lastname)}
+                error={
+                  formik.touched.lastname && Boolean(formik.errors.lastname)
+                }
                 helperText={formik.touched.lastname && formik.errors.lastname}
               />
             </Box>
@@ -205,8 +239,8 @@ function SignUp() {
             >
               Password
             </Typography>
-            <OutlinedInput
-            name="password"
+            <TextField
+              name="password"
               label="Password"
               fullWidth
               sx={{
@@ -218,23 +252,27 @@ function SignUp() {
               }}
               id="outlined-adornment-password"
               type={showPassword ? "text" : "password"}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label={
-                      showPassword
-                        ? "hide the password"
-                        : "display the password"
-                    }
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                    onMouseUp={handleMouseUpPassword}
-                    edge="end"
-                  >
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              }
+              slotProps={{
+                input: {
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label={
+                          showPassword
+                            ? "hide the password"
+                            : "display the password"
+                        }
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                        onMouseUp={handleMouseUpPassword}
+                        edge="end"
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                },
+              }}
               value={formik.values.password}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
@@ -279,7 +317,7 @@ function SignUp() {
               name="confirmpassword"
               fullWidth
               label="Password"
-              type="text"
+              type={showPassword ? "text" : "password"}
               sx={{
                 "& .MuiInputBase-input": {
                   height: "46px",
@@ -291,8 +329,13 @@ function SignUp() {
               value={formik.values.confirmpassword}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              error={formik.touched.confirmpassword && Boolean(formik.errors.confirmpassword)}
-              helperText={formik.touched.confirmpassword && formik.errors.confirmpassword}
+              error={
+                formik.touched.confirmpassword &&
+                Boolean(formik.errors.confirmpassword)
+              }
+              helperText={
+                formik.touched.confirmpassword && formik.errors.confirmpassword
+              }
             />
           </Box>
 
@@ -306,6 +349,7 @@ function SignUp() {
             }}
           >
             <Checkbox
+             onChange={() => setChecked(!checked)}
               {...label}
               sx={{
                 color: orange[300],
@@ -323,7 +367,7 @@ function SignUp() {
 
           <Box sx={{ display: "flex", justifyContent: "center" }}>
             <Button
-             onClick = {() => createAccount()}
+              onClick={formik.handleSubmit}
               sx={{
                 fontSize: "16px",
                 color: "#2a2622",
@@ -346,7 +390,10 @@ function SignUp() {
               {" "}
               Already have an account?
             </Typography>
-            <Typography onClick={() => navigation("/login")} sx={{ color: "#d9a520", fontWeight: "500",cursor:"pointer" }}>
+            <Typography
+              onClick={() => navigation("/login")}
+              sx={{ color: "#d9a520", fontWeight: "500", cursor: "pointer" }}
+            >
               Sign in
             </Typography>
           </Box>
