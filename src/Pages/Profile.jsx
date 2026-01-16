@@ -57,8 +57,9 @@ function Profile() {
       <QuickAction/>
 
       <RecentOrders/>
-
       </Box>
+
+      <Footer/>
 
 
      
