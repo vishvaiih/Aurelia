@@ -9,8 +9,12 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 function SignInCom() {
+
+    const navigation = useNavigate(); 
+
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -53,12 +57,15 @@ function SignInCom() {
              if(filterDataByEmail?.password === values.password){
                 localStorage.setItem("userDetail",JSON.stringify(filterDataByEmail?.id))
                 toast.success("logIn successfully")
+                navigation("/")
              }else{
                 toast.error("password is wrong")
              }
            }else{
              toast.error("user not found")
            }
+
+          
             
         }});
 
@@ -77,6 +84,7 @@ function SignInCom() {
           Email Address
         </Typography>
         <TextField
+         color="warning"
           fullWidth
           placeholder="Email"
           name="email"
@@ -110,6 +118,7 @@ function SignInCom() {
           Password
         </Typography>
         <TextField
+         color="warning"
           name="password"
           placeholder="Password"
           fullWidth

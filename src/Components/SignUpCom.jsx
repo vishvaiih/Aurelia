@@ -158,6 +158,7 @@ function SignUpCom() {
                 Last Name
               </Typography>
               <TextField
+               color="warning"
                 placeholder="Last Name"
                 name="lastname"
                 type="text"
@@ -193,6 +194,7 @@ function SignUpCom() {
               Email
             </Typography>
             <TextField
+             color="warning"
               fullWidth
               placeholder="Email"
               name="email"
@@ -226,6 +228,7 @@ function SignUpCom() {
               Password
             </Typography>
             <TextField
+             color="warning"
               name="password"
               placeholder="Password"
               fullWidth
@@ -281,6 +284,7 @@ function SignUpCom() {
               Confirm Password
             </Typography>
             <TextField
+             color="warning"
               name="confirmpassword"
               fullWidth
               placeholder="Password"

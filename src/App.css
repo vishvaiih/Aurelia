@@ -49,6 +49,7 @@
 .iconmargin{
   margin-right:20px;
   font-size: 18px !important;
+  cursor: pointer;
 }
 
 .Signinbtn{
