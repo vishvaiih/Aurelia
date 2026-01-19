@@ -48,7 +48,7 @@ function EditProfile() {
       .required("Address is required")
       .matches(/^\d+\s+[A-Za-z\s]+$/, "Format must be like: 123 Luxury Lane"),
     city: yup.string("Enter your city").required("city is required"),
-  country: yup.string("Enter your country").required("country is required"),
+  // country: yup.string("Enter your country").required("country is required"),
   });
 
   const formik = useFormik({
@@ -289,12 +289,18 @@ function EditProfile() {
                   },
                 }}
                 value={formik.values.number}
-                onChange={formik.handleChange}
+                onChange={(e) => {
+                  if(e.target.value >= 0) {
+                    formik.handleChange(e)
+                  }
+                }}
+                
                 onBlur={formik.handleBlur}
                 error={formik.touched.number && Boolean(formik.errors.number)}
                 helperText={formik.touched.number && formik.errors.number}
               />
             </Box>
+
           </Box>
 
           <Box
@@ -403,7 +409,7 @@ function EditProfile() {
                       padding: "0 14px",
                       display: "flex",
                       alignItems: "center",
-                      color: "#d2d2d0",
+                      // color: "#d2d2d0",
                     },
                   }}
                   value={formik.values.country}

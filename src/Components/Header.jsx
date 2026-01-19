@@ -16,7 +16,7 @@ function Header() {
     <>
       <Box  sx={{ backgroundColor:"#fbfaf8",borderBottom:"1px solid #e7e2da", width: "100%",height:"74px",display: "flex",alignItems: "center",justifyContent: "space-between"}}>
         <Box  sx={{ margin: "60px",display: "flex"}}>
-          <Typography className="Aurelia">Aurelia</Typography>
+          <Typography className="Aurelia" onClick={() =>navigation("/")}>Aurelia</Typography>
           <Box className="menu">
            <Typography className="perticularmenu Home" onClick={() =>navigation("/")}>Home</Typography>
             <Typography  className="perticularmenu">Shop All</Typography>
