@@ -14,7 +14,7 @@ function Header() {
     let getItem = JSON.parse(localStorage.getItem("userDetail"))
   return (
     <>
-      <Box  sx={{ width: "100%",height:"74px",display: "flex",alignItems: "center",justifyContent: "space-between"}}>
+      <Box  sx={{ backgroundColor:"#fbfaf8",borderBottom:"1px solid #e7e2da", width: "100%",height:"74px",display: "flex",alignItems: "center",justifyContent: "space-between"}}>
         <Box  sx={{ margin: "60px",display: "flex"}}>
           <Typography className="Aurelia">Aurelia</Typography>
           <Box className="menu">

@@ -4,6 +4,7 @@ import Home from "./Pages/Home"
 import LogIn from './Pages/LogIn';
 import SignUp from './Pages/SignUp';
 import Profile from './Pages/Profile';
+import EditProfile from './Pages/EditProfile';
 
 function Routing() {
   return (
@@ -13,6 +14,7 @@ function Routing() {
      <Route path="/login" element={<LogIn/>}/>
      <Route path="/signup" element= {<SignUp/>}/>
      <Route path="/profile" element={<Profile/>}/>
+     <Route path="/profile/edit" element={<EditProfile/>}/>
    </Routes>
    
     

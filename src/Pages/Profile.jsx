@@ -13,6 +13,13 @@ import Footer from "../Components/Footer";
 
 
 function Profile() {
+
+let getUserDetail = JSON.parse(localStorage.getItem("userDetail"))
+let getData = JSON.parse(localStorage.getItem("data"))
+
+let filteredData = getData?.find((itm) => itm.id == getUserDetail)
+
+
   return (
     <>
       <Header />
@@ -39,16 +46,17 @@ function Profile() {
               border: "4px solid #f1e7c9",
               width: 70,
               height: 70,
+              fontFamily:"serif"
             }}
           >
-            N
+            {filteredData.firstname.charAt(0) + filteredData.lastname.charAt(0)}
           </Avatar>
         </Box>
         <Box>
           <Typography sx={{ fontSize: "27px", fontFamily: "serif" }}>
-            vishva bhensadadiya
+            {filteredData.firstname + " " + filteredData.lastname}
           </Typography>
-          <Typography sx={{ color: "#867b6b" }}>vishva@gmail.com</Typography>
+          <Typography sx={{ color: "#867b6b" }}>{filteredData.email}</Typography>
         </Box>
       </Box>
       <Box

@@ -1,6 +1,6 @@
 
 import { Box, Button, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 
 import InputAdornment from "@mui/material/InputAdornment";
@@ -14,6 +14,8 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../UseContext/UseContext";
+
 
 
 function SignUpCom() {
@@ -21,10 +23,7 @@ function SignUpCom() {
      const navigation = useNavigate();
 
     const [showPassword, setShowPassword] = useState(false);
-      const [data, setData] = useState(() => {
-        let getItem = JSON.parse(localStorage.getItem("data")) || [];
-        return getItem;
-      });
+    const { data, setData } = useContext(UserContext);
       const [checked, setChecked] = useState(false);
       console.log("checked", checked);
     
