@@ -1,0 +1,109 @@
+import React from "react";
+import Footer from "../Components/Footer";
+import Header from "../Components/Header";
+import { Box, Typography,MenuItem } from "@mui/material";
+import { Funnel } from "lucide-react";
+import TextField from "@mui/material/TextField";
+
+function ShopAll() {
+  return (
+    <>
+      <Header />
+      <Box
+        sx={{
+          height: "17vh",
+          backgroundColor: "#f8f7f4",
+          padding: "40px 65px",
+        }}
+      >
+        <Typography
+          sx={{
+            fontSize: "45px",
+            color: "#2a2622",
+            fontFamily: "serif",
+            marginBottom: "10px",
+          }}
+        >
+          All Jewelry
+        </Typography>
+        <Typography sx={{ fontSize: "18px", color: "#867370" }}>
+          12 pieces of exquisite craftsmanship
+        </Typography>
+      </Box>
+
+      <Box
+        sx={{
+          minHeight: "600px",
+          padding: "40px 65px",
+          backgroundColor: "#fbfaf8",
+          display:"flex",
+          justifyContent:"space-between"
+        }}
+      >
+        <Box sx={{ display: "flex", color: "#54514e" }}>
+          <Funnel style={{ marginRight: "10px", color: "#2a2622" }} size={20} />
+          <Typography sx={{ fontFamily: "serif", fontSize: "15px" }}>
+            Filters
+          </Typography>
+        </Box>
+
+        <Box>
+            <Box>
+                
+            <TextField
+                  select
+                  color="warning"
+                  name="Filter"
+                  defaultValue="Featured"
+                  sx={{
+                    width: "180px",
+                   
+                    "& .MuiInputBase-root": {
+                      height: "38px",
+                      boxShadow: "0px 0px 4px 0px #e0dbd1",
+                      borderRadius:"10px",
+                    },
+                    "& .MuiInputBase-input": {
+                      height: "38px",
+                      padding: "0 14px",
+                      display: "flex",
+                      alignItems: "center",
+                      borderRadius:"10px",
+                     
+                    },
+                  }}
+                 
+                >
+                 
+                    <MenuItem
+                    
+                      sx={{
+                        "&:hover": {
+                          backgroundColor: "#456882",
+                          borderRadius: "10px",
+                          margin: " 0px 5px",
+                          color: "white",
+                        },
+                        "&.Mui-selected": {
+                          backgroundColor: "#456882 !important",
+                          borderRadius: "10px",
+                          margin: " 0px 5px",
+                          color: "white",
+                        },
+                      }}
+                    >
+                    
+                    </MenuItem>
+               
+                </TextField>
+
+            </Box>
+        </Box>
+      </Box>
+
+      <Footer />
+    </>
+  );
+}
+
+export default ShopAll;

@@ -19,7 +19,7 @@ function Header() {
           <Typography className="Aurelia" onClick={() =>navigation("/")}>Aurelia</Typography>
           <Box className="menu">
            <Typography className="perticularmenu Home" onClick={() =>navigation("/")}>Home</Typography>
-            <Typography  className="perticularmenu">Shop All</Typography>
+            <Typography  className="perticularmenu" onClick={() => navigation("/shop")}>Shop All</Typography>
             <Typography  className="perticularmenu">Gold</Typography>
             <Typography  className="perticularmenu"> Silver</Typography>
             <Typography  className="perticularmenu">Diamonds</Typography>

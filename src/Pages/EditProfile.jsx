@@ -48,7 +48,7 @@ function EditProfile() {
       .required("Address is required")
       .matches(/^\d+\s+[A-Za-z\s]+$/, "Format must be like: 123 Luxury Lane"),
     city: yup.string("Enter your city").required("city is required"),
-  // country: yup.string("Enter your country").required("country is required"),
+  
   });
 
   const formik = useFormik({
