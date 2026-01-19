@@ -5,14 +5,37 @@ import { Box, Typography, MenuItem } from "@mui/material";
 import { Funnel } from "lucide-react";
 import TextField from "@mui/material/TextField";
 import Checkbox from "@mui/material/Checkbox";
-import { categories, productTypes } from "../Database/Database";
+import { categories, products, productTypes } from "../Database/Database";
+import Paper from "@mui/material/Paper";
+import Grid from "@mui/material/Grid";
+import { styled } from "@mui/material/styles";
+
+
 
 function ShopAll() {
+  const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: "#fff",
+    ...theme.typography.body2,
+    padding: theme.spacing(2),
+    textAlign: "center",
+    color: (theme.vars ?? theme).palette.text.secondary,
+    ...theme.applyStyles("dark", {
+      backgroundColor: "#1A2027",
+    }),
+  }));
+
   const option = [
     "Featured",
     "Newest",
     "Price : Low to High",
     "Price : High to Low",
+  ];
+
+  const priceRange = [
+    " Under $500",
+    "$500 - $1,000",
+    "$1,000 - $3,000",
+    "Over $3,000",
   ];
 
   const label = { slotProps: { input: { "aria-label": "Checkbox demo" } } };
@@ -110,50 +133,102 @@ function ShopAll() {
           </Box>
         </Box>
 
-        <Box sx={{ marginTop: "10px" }}>
-          <Typography sx={{ fontFamily: "serif" }}>Category</Typography>
+        <Box sx={{display:"flex"}}>
+          <Box sx={{marginRight:"150px"}}>
+            <Box sx={{ marginTop: "10px" }}>
+              <Typography sx={{ fontFamily: "serif" }}>Category</Typography>
 
-          {categories.map((itm) => (
-            <Box sx={{ display: "flex", alignItems: "center" }}>
-              <Checkbox {...label} style={{ color: "#d9a520" }} />
-              <Typography
-                sx={{ color: "#413d39", fontSize: "15px", fontWeight: "500" }}
-              >
-                {itm.name}
-              </Typography>
+              {categories.map((itm) => (
+                <Box sx={{ display: "flex", alignItems: "center" }}>
+                  <Checkbox {...label} style={{ color: "#d9a520" }} />
+                  <Typography
+                    sx={{
+                      color: "#413d39",
+                      fontSize: "15px",
+                      fontWeight: "500",
+                    }}
+                  >
+                    {itm.name}
+                  </Typography>
+                </Box>
+              ))}
             </Box>
-          ))}
+
+            <Box sx={{ marginTop: "10px" }}>
+              <Typography sx={{ fontFamily: "serif" }}>
+                Product Type{" "}
+              </Typography>
+
+              {productTypes.map((itm) => (
+                <Box sx={{ display: "flex", alignItems: "center" }}>
+                  <Checkbox {...label} style={{ color: "#d9a520" }} />
+                  <Typography
+                    sx={{
+                      color: "#413d39",
+                      fontSize: "15px",
+                      fontWeight: "500",
+                    }}
+                  >
+                    {itm.name}
+                  </Typography>
+                </Box>
+              ))}
+            </Box>
+
+            <Box sx={{ marginTop: "10px" }}>
+              <Typography sx={{ fontFamily: "serif" }}>Price Range</Typography>
+
+              {priceRange.map((itm) => (
+                <Box sx={{ display: "flex", alignItems: "center" }}>
+                  <Checkbox {...label} style={{ color: "#d9a520" }} />
+                  <Typography
+                    sx={{
+                      color: "#413d39",
+                      fontSize: "15px",
+                      fontWeight: "500",
+                    }}
+                  >
+                    {itm}
+                  </Typography>
+                </Box>
+              ))}
+            </Box>
+          </Box>
+
+          <Box sx={{ width: '100%' }}>
+            
+      <Grid  sx={{display:"flex"}} container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+
+        {products.map((itm) => 
+
+              <Box sx={{minHeight:"50vh",width:"23%",marginTop:"10px"}}>
+              <Box>
+                <img src={itm.image} style={{height:"33vh",borderRadius:"15px",width:"100%"}} /> 
+              </Box>
+              <Box sx={{display:"flex",margin:"13px 0px 10px",color:"#9e968c",alignItems:"center"}}>
+                  <Typography sx={{fontSize:"12px",textTransform:"uppercase"}}>{itm.category}</Typography>
+                  <Box sx={{height:"5px",width:"5px",backgroundColor:"#9e968c",borderRadius:"100%",margin:"0px 5px"}}></Box>
+                  <Typography sx={{fontSize:"12px",textTransform:"uppercase"}}>{itm.type}</Typography>
+              </Box>
+              <Typography sx={{color:"#423e3a",fontFamily:"serif",fontSize:"17px"}}>{itm.name}</Typography>
+
+              <Typography sx={{color:"#d9a521",marginTop:"10px",fontWeight:"600",fontSize:"18px"}} >{itm.price}</Typography>
+              
+              
+               </Box> 
+        
+        )}
+             
+           
+      
+
+      </Grid>
+     
+    </Box>
+
         </Box>
 
-        <Box sx={{ marginTop: "10px" }}>
-          <Typography sx={{ fontFamily: "serif" }}>Product Type </Typography>
-
-          {productTypes.map((itm) => (
-            <Box sx={{ display: "flex", alignItems: "center" }}>
-              <Checkbox {...label} style={{ color: "#d9a520" }} />
-              <Typography
-                sx={{ color: "#413d39", fontSize: "15px", fontWeight: "500" }}
-              >
-                {itm.name}
-              </Typography>
-            </Box>
-          ))}
-        </Box>
-
-        <Box sx={{ marginTop: "10px" }}>
-          <Typography sx={{ fontFamily: "serif" }}>Price Range</Typography>
-
-          
-            <Box sx={{ display: "flex", alignItems: "center" }}>
-              <Checkbox {...label} style={{ color: "#d9a520" }} />
-              <Typography
-                sx={{ color: "#413d39", fontSize: "15px", fontWeight: "500" }}
-              >
-              Under $500
-              </Typography>
-            </Box>
-          
-        </Box>
+      
       </Box>
 
       <Footer />
