@@ -1,7 +1,7 @@
 import React from "react";
 import Footer from "../Components/Footer";
 import Header from "../Components/Header";
-import { Box, Typography, MenuItem } from "@mui/material";
+import { Box, Typography, MenuItem, Button } from "@mui/material";
 import { Funnel } from "lucide-react";
 import TextField from "@mui/material/TextField";
 import Checkbox from "@mui/material/Checkbox";
@@ -9,8 +9,6 @@ import { categories, products, productTypes } from "../Database/Database";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import { styled } from "@mui/material/styles";
-
-
 
 function ShopAll() {
   const Item = styled(Paper)(({ theme }) => ({
@@ -133,8 +131,8 @@ function ShopAll() {
           </Box>
         </Box>
 
-        <Box sx={{display:"flex"}}>
-          <Box sx={{marginRight:"150px"}}>
+        <Box sx={{ display: "flex" }}>
+          <Box sx={{ marginRight: "130px" }}>
             <Box sx={{ marginTop: "10px" }}>
               <Typography sx={{ fontFamily: "serif" }}>Category</Typography>
 
@@ -186,6 +184,7 @@ function ShopAll() {
                       color: "#413d39",
                       fontSize: "15px",
                       fontWeight: "500",
+                      minWidth: "120px",
                     }}
                   >
                     {itm}
@@ -195,40 +194,103 @@ function ShopAll() {
             </Box>
           </Box>
 
-          <Box sx={{ width: '100%' }}>
-            
-      <Grid  sx={{display:"flex"}} container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+          <Box sx={{ width: "100%" }}>
+            <Grid
+              sx={{ display: "flex" }}
+              container
+              rowSpacing={1}
+              columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+            >
+              {products.map((itm) => (
+                <Box
+                  sx={{ minHeight: "50vh", width: "23%", marginTop: "10px" }}
+                >
+                  <Box sx={{ position: "relative" }}>
+    <img
+      src={itm.image}
+      style={{
+        height: "33vh",
+        borderRadius: "15px",
+        width: "100%",
+        objectFit: "cover",
+      }}
+    />
 
-        {products.map((itm) => 
+    {/* Button on Image */}
+    <Button
+      variant="contained"
+      sx={{
+        position: "absolute",
+        bottom: "10px",
+        right: "10px",
+        backgroundColor: "#d9a521",
+        color: "#fff",
+        fontSize: "12px",
+        padding: "6px 12px",
+        borderRadius: "20px",
+        "&:hover": {
+          backgroundColor: "#c3921c",
+        },
+      }}
+    >
+      Add to Cart
+    </Button>
+  </Box>
 
-              <Box sx={{minHeight:"50vh",width:"23%",marginTop:"10px"}}>
-              <Box>
-                <img src={itm.image} style={{height:"33vh",borderRadius:"15px",width:"100%"}} /> 
-              </Box>
-              <Box sx={{display:"flex",margin:"13px 0px 10px",color:"#9e968c",alignItems:"center"}}>
-                  <Typography sx={{fontSize:"12px",textTransform:"uppercase"}}>{itm.category}</Typography>
-                  <Box sx={{height:"5px",width:"5px",backgroundColor:"#9e968c",borderRadius:"100%",margin:"0px 5px"}}></Box>
-                  <Typography sx={{fontSize:"12px",textTransform:"uppercase"}}>{itm.type}</Typography>
-              </Box>
-              <Typography sx={{color:"#423e3a",fontFamily:"serif",fontSize:"17px"}}>{itm.name}</Typography>
 
-              <Typography sx={{color:"#d9a521",marginTop:"10px",fontWeight:"600",fontSize:"18px"}} >{itm.price}</Typography>
-              
-              
-               </Box> 
-        
-        )}
-             
-           
-      
+                  <Box
+                    sx={{
+                      display: "flex",
+                      margin: "13px 0px 10px",
+                      color: "#9e968c",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Typography
+                      sx={{ fontSize: "12px", textTransform: "uppercase" }}
+                    >
+                      {itm.category}
+                    </Typography>
+                    <Box
+                      sx={{
+                        height: "5px",
+                        width: "5px",
+                        backgroundColor: "#9e968c",
+                        borderRadius: "100%",
+                        margin: "0px 5px",
+                      }}
+                    ></Box>
+                    <Typography
+                      sx={{ fontSize: "12px", textTransform: "uppercase" }}
+                    >
+                      {itm.type}
+                    </Typography>
+                  </Box>
+                  <Typography
+                    sx={{
+                      color: "#423e3a",
+                      fontFamily: "serif",
+                      fontSize: "17px",
+                    }}
+                  >
+                    {itm.name}
+                  </Typography>
 
-      </Grid>
-     
-    </Box>
-
+                  <Typography
+                    sx={{
+                      color: "#d9a521",
+                      marginTop: "10px",
+                      fontWeight: "600",
+                      fontSize: "18px",
+                    }}
+                  >
+                    ${itm.price}
+                  </Typography>
+                </Box>
+              ))}
+            </Grid>
+          </Box>
         </Box>
-
-      
       </Box>
 
       <Footer />
