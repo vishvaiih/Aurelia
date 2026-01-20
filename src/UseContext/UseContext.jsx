@@ -14,7 +14,10 @@ export const UserProvider = ({ children }) => {
       return getCart;
     });   
     
-   const [wishList,setWishList] = useState([]);
+   const [wishList,setWishList] = useState(() => {
+    let getWishList = JSON.parse(localStorage.getItem("wishlist")) || [];
+    return getWishList;
+  });   
 
 
   return (

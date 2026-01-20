@@ -1,31 +1,20 @@
-import React, { useContext } from "react";
-import { Package } from "lucide-react";
+import React from "react";
+
 import { Box, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
-import { UserContext } from "../UseContext/UseContext";
-import { products } from "../Database/Database";
+
 import { useLocation } from "react-router-dom";
 
-function RecentOrderLeft() {
-  const { cart } = useContext(UserContext);
+function RecentOrderLeft({product}) {
+ 
 
   const location = useLocation();
   const show = location.pathname == "/wishlist";
 
-  console.log("....", cart);
-  let getUserDetail = JSON.parse(localStorage.getItem("userDetail"));
-
-  let findUser = cart?.find((itm) => itm.userId == getUserDetail);
-  console.log("findUser", findUser);
-
-  let findProduct = findUser?.items?.map((i) => i.productId);
-  console.log("findProduct", findProduct);
-
-  const product = products?.filter((i) => findProduct.includes(i.id));
-  console.log("product", product);
+  
 
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: "#fff",
