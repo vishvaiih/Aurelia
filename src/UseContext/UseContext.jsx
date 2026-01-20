@@ -9,9 +9,16 @@ export const UserProvider = ({ children }) => {
             return getItem;
           });
 
+    const [cart,setCart] = useState(() => {
+      let getCart = JSON.parse(localStorage.getItem("cart")) || [];
+      return getCart;
+    });   
+    
+   
+
 
   return (
-    <UserContext.Provider value={{ data, setData }}>
+    <UserContext.Provider value={{ data, setData,cart,setCart}}>
       {children}
     </UserContext.Provider>
   );

@@ -6,6 +6,7 @@ import SignUp from "./Pages/SignUp";
 import Profile from "./Pages/Profile";
 import EditProfile from "./Pages/EditProfile";
 import ShopAll from "./Pages/ShopAll";
+import Cart from "./Pages/Cart";
 
 function Routing() {
   return (
@@ -17,6 +18,7 @@ function Routing() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/profile/edit" element={<EditProfile />} />
         <Route path="/shop" element={<ShopAll />} />
+        <Route path="/cart" element={<Cart/>}/>
       </Routes>
     </>
   );

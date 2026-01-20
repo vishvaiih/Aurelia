@@ -1,10 +1,55 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Box, Typography, Button } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import {  Heart, ShoppingBag } from "lucide-react";
 import {  products } from "../Database/Database";
+import { UserContext } from '../UseContext/UseContext';
 
 function ProductList() {
+ 
+    const { cart,setCart } = useContext(UserContext);
+
+  const addToCart = (itm) => {
+        console.log(itm,".....")
+
+        let getUserDetail = JSON.parse(localStorage.getItem("userDetail"));
+
+        let userId = getUserDetail;
+        let productId=itm?.id;
+
+        let getCart = JSON.parse(localStorage.getItem("cart")) || [];
+        console.log("getCart",getCart)
+
+        let Cart = getCart?.find((itm) => itm?.userId == userId);
+        console.log("Cart",Cart)
+
+        if(!Cart){
+           Cart = {
+            userId,
+            items:[]
+           }
+           getCart.push(Cart);
+        }
+
+        let product = Cart?.items?.find((itm) => itm?.productId == productId)
+        console.log("product",product)
+
+        if(product){
+          product.qty += 1;
+        }else{
+          Cart?.items?.push({
+            productId,
+            qty:1
+          })
+        }
+
+        setCart(getCart);
+
+        localStorage.setItem("cart",JSON.stringify(getCart));     
+  }
+
+
+
   return (
     
     <Box sx={{ width: "100%" }}>
@@ -31,6 +76,7 @@ function ProductList() {
 
             {/* Button on Image */}
             <Button
+              onClick = {() => addToCart(itm)}
               variant="contained"
               sx={{
                 width:"60%",

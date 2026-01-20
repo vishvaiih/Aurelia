@@ -2,8 +2,6 @@ import React from "react";
 import Footer from "../Components/Footer";
 import Header from "../Components/Header";
 import { Box } from "@mui/material";
-import Paper from "@mui/material/Paper";
-import { styled } from "@mui/material/styles";
 import AllJewelry from "../Components/AllJewelry";
 import Filters from "../Components/Filters";
 import ProductList from "../Components/ProductList";
@@ -30,6 +28,7 @@ function ShopAll() {
 
           <ProductList />
         </Box>
+        
       </Box>
 
       <Footer />
