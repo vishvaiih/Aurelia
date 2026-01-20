@@ -66,7 +66,6 @@ function ProductList() {
     let wishList = getWishList?.find((itm) => itm?.userId == userId);
     console.log("wishList", wishList);
 
-
     if (!wishList) {
       wishList = {
         userId,
@@ -78,12 +77,24 @@ function ProductList() {
     let product = wishList?.items?.find((itm) => itm?.productId == productId);
     console.log("product", product);
 
+    // if (product) {
+    //   setWish(!wish);
+    //   return;
+    // }
+
     if (product) {
+      wishList.items = wishList?.items?.filter(
+        (itm) => itm?.productId !== productId
+      );
+
       setWish(!wish);
+
+      setWishList(getWishList);
+
+      localStorage.setItem("wishlist", JSON.stringify(getWishList));
+
       return;
     }
-    
-
 
     wishList?.items?.push({ productId });
 
@@ -152,14 +163,13 @@ function ProductList() {
                 }}
               >
                 <Checkbox
-          
                   {...label}
                   icon={<FavoriteBorder />}
                   checkedIcon={<Favorite />}
                   sx={{
-                    color: "default", 
+                    color: "default",
                     "&.Mui-checked": {
-                      color: "red", 
+                      color: "red",
                     },
                   }}
                 />
