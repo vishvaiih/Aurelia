@@ -7,14 +7,15 @@ import { UserContext } from '../UseContext/UseContext';
 
 function ProductList() {
  
-    const { cart,setCart } = useContext(UserContext);
+    const { setCart,setWishList } = useContext(UserContext);
+
+    let getUserDetail = JSON.parse(localStorage.getItem("userDetail"));
+    let userId = getUserDetail;
 
   const addToCart = (itm) => {
         console.log(itm,".....")
 
-        let getUserDetail = JSON.parse(localStorage.getItem("userDetail"));
-
-        let userId = getUserDetail;
+        
         let productId=itm?.id;
 
         let getCart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -48,6 +49,39 @@ function ProductList() {
         localStorage.setItem("cart",JSON.stringify(getCart));     
   }
 
+
+  const addToWishList = (itm) => {
+       console.log("/////",itm);
+
+         let productId = itm?.id;
+
+         let getWishList = JSON.parse(localStorage.getItem("wishlist")) || [];
+         console.log("getWishList",getWishList)
+ 
+         let wishList = getWishList?.find((itm) => itm?.userId == userId);
+         console.log("wishList",wishList)
+
+         if(!wishList){
+          wishList = {
+            userId,
+            items:[]
+          }
+          getWishList.push(wishList);
+         }
+
+         let product = wishList?.items?.find((itm) => itm?.productId == productId)
+         console.log("product",product)
+ 
+         if(product){
+          return ;
+         }
+            
+         wishList?.items?.push({productId})
+
+         setWishList(getWishList)
+
+         localStorage.setItem("wishlist",JSON.stringify(getWishList));     
+  }
 
 
   return (
@@ -96,6 +130,7 @@ function ProductList() {
               Add to Cart
             </Button>
             <Button
+             onClick = {() => addToWishList(itm)}
               variant="contained"
               sx={{
                 width:"20%",

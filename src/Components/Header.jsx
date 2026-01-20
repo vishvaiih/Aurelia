@@ -29,7 +29,7 @@ function Header() {
        
           <Box className="icon">
           <SearchIcon className="iconmargin"/>
-          <FavoriteBorderOutlinedIcon className="iconmargin" />
+          <FavoriteBorderOutlinedIcon className="iconmargin" onClick={() => navigation("/wishlist")}/>
           <LocalMallOutlinedIcon  className="iconmargin"  onClick={() => navigation("/cart")}/>
          
            {getItem ? (

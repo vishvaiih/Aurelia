@@ -14,11 +14,11 @@ export const UserProvider = ({ children }) => {
       return getCart;
     });   
     
-   
+   const [wishList,setWishList] = useState([]);
 
 
   return (
-    <UserContext.Provider value={{ data, setData,cart,setCart}}>
+    <UserContext.Provider value={{ data, setData,cart,setCart,wishList,setWishList}}>
       {children}
     </UserContext.Provider>
   );
