@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Box, Button, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
@@ -8,9 +8,12 @@ import Stack from "@mui/material/Stack";
 
 import { useLocation } from "react-router-dom";
 
-function RecentOrderLeft({ product }) {
+function RecentOrderLeft({ product,increment,qty }) {
+  // console.log("product......",product)
   const location = useLocation();
   const show = location.pathname == "/wishlist";
+
+ 
 
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: "#fff",
@@ -36,6 +39,12 @@ function RecentOrderLeft({ product }) {
   //       price: "Price",
   //     },
   //   ];
+
+ 
+
+ 
+
+
   return (
     <Grid size={8}>
       <Item sx={{ boxSizing: "border-box", borderRadius: "15px" }}>
@@ -64,7 +73,10 @@ function RecentOrderLeft({ product }) {
 
         <Grid>
           <Stack spacing={3}>
-            {product.map((i) => (
+
+            {product.length > 0 ? (
+                <>
+                 {product.map((i) => (
               <Item
                 sx={{
                   minHeight: "5vh",
@@ -116,8 +128,9 @@ function RecentOrderLeft({ product }) {
                       >
                         -
                       </Button>
-                      <Typography sx={{ marginRight: "5%" }}>qty</Typography>
+                      <Typography sx={{ marginRight: "5%" }}>{qty}</Typography>
                       <Button
+                      onClick = {() => increment(i.id)}
                         sx={{ border: "1px solid #acbac4", color: "black" }}
                       >
                         +
@@ -131,6 +144,12 @@ function RecentOrderLeft({ product }) {
                 </Box>
               </Item>
             ))}
+                
+                </>
+            ):(
+                   "No any selected product"
+            )}
+           
           </Stack>
         </Grid>
       </Item>
