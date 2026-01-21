@@ -53,7 +53,7 @@ function Cart() {
            ...itm,
            items: itm?.items?.map((i) =>
              Number(i.productId) === Number(productid)
-               ? { ...i, qty: Number(i.qty) + 1 }
+               ? { ...i, qty: Number(i.qty) - 1 }
                : i
            ),
          }
@@ -67,6 +67,8 @@ function Cart() {
 
 
 
+
+
   return (
     <>
       <Header />
@@ -75,6 +77,7 @@ function Cart() {
         increment={increment}
         decrement={decrement}
         findUser={findUser}
+      
       />
       <Footer />
     </>

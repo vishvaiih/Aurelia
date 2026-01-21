@@ -16,8 +16,12 @@ import {
 } from "lucide-react";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import QuickActionData from "./QuickActionData";
+import { useNavigate } from "react-router-dom";
 
 function QuickAction() {
+
+  const navigation = useNavigate();
+
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: "#fff",
     ...theme.typography.body2,
@@ -133,7 +137,7 @@ function QuickAction() {
             ))}
             <Box sx={{ display: "flex", margin: "0px 10px" }}>
               <LogoutOutlinedIcon sx={{ color: "#df2b43" }} />
-              <Typography sx={{ marginLeft: "10px", color: "#df2b43" }}>
+              <Typography  onClick = {() => navigation("/login")} sx={{ marginLeft: "10px", color: "#df2b43" }}>
                 Sign Out
               </Typography>
             </Box>

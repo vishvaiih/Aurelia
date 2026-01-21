@@ -9,15 +9,12 @@ import Stack from "@mui/material/Stack";
 import { useLocation } from "react-router-dom";
 import { UserContext } from "../UseContext/UseContext";
 
-function RecentOrderLeft({ product,increment,decrement,findUser }) {
+function RecentOrderLeft({ product, increment, decrement, findUser }) {
   // console.log("product......",product)
   const location = useLocation();
   const show = location.pathname == "/wishlist";
-  
-   const { cart } = useContext(UserContext);
 
-
- 
+  const { cart } = useContext(UserContext);
 
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: "#fff",
@@ -44,16 +41,27 @@ function RecentOrderLeft({ product,increment,decrement,findUser }) {
   //     },
   //   ];
 
- const findProduct = (productId) => {
-      const find = findUser?.items?.find((itm) => itm?.productId === productId)
-      console.log("find",find);
+  const findProduct = (productId) => {
+    const find = findUser?.items?.find((itm) => itm?.productId === productId);
+    console.log("find", find);
 
-      return  find.qty
+    return find?.qty;
+  };
 
- }
+  const price = (itm) => {
+    console.log("itm", itm);
 
- 
+    const qty = findProduct(itm);
+    console.log("vbvbvb",product);
 
+    const priceOfProduct = itm?.price * qty;
+    console.log(priceOfProduct, "priceOfProduct");
+
+    return priceOfProduct;
+    
+  };
+
+  
 
   return (
     <Grid size={8}>
@@ -83,85 +91,87 @@ function RecentOrderLeft({ product,increment,decrement,findUser }) {
 
         <Grid>
           <Stack spacing={3}>
-
-            {product.length > 0 ? (
-                <>
-                 {product.map((i) => (
-              <Item
-                sx={{
-                  minHeight: "5vh",
-                  backgroundColor: "#f7f6f3",
-                  display: "flex",
-                  alignItems: "center",
-                }}
-              >
-                <Box
-                  sx={{
-                    height: "7vh",
-                    width: "7vh",
-                    backgroundColor: "#f4eedd",
-                    borderRadius: "8px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    color: "#d9a520",
-                    mr: 2,
-                  }}
-                >
-                  <img
-                    src={i.image}
-                    alt={i.name}
-                    style={{ width: "30px", height: "30px" }}
-                  />
-                </Box>
-
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    width: "100%",
-                  }}
-                >
-                  <Typography
-                    sx={{ color: "#2a2936", fontWeight: "500", width: "20%" }}
+            {product?.length > 0 ? (
+              <>
+                {product?.map((i) => (
+                  <Item
+                    sx={{
+                      minHeight: "5vh",
+                      backgroundColor: "#f7f6f3",
+                      display: "flex",
+                      alignItems: "center",
+                    }}
                   >
-                    {i.name}
-                  </Typography>
-                  {!show ? (
-                    <Box sx={{ display: "flex", alignItems: "center" }}>
-                      <Button
+                    <Box
+                      sx={{
+                        height: "7vh",
+                        width: "7vh",
+                        backgroundColor: "#f4eedd",
+                        borderRadius: "8px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        color: "#d9a520",
+                        mr: 2,
+                      }}
+                    >
+                      <img
+                        src={i.image}
+                        alt={i.name}
+                        style={{ width: "30px", height: "30px" }}
+                      />
+                    </Box>
+
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        width: "100%",
+                      }}
+                    >
+                      <Typography
                         sx={{
-                          border: "1px solid #acbac4",
-                          color: "black",
-                          marginRight: "5%",
+                          color: "#2a2936",
+                          fontWeight: "500",
+                          width: "20%",
                         }}
                       >
-                        -
-                      </Button>
-                      <Typography sx={{ marginRight: "5%" }}>
-                          {findProduct(i.id)}
+                        {i.name}
                       </Typography>
-                      <Button
-                      onClick = {() => increment(i.id)}
-                        sx={{ border: "1px solid #acbac4", color: "black" }}
-                      >
-                        +
-                      </Button>
-                    </Box>
-                  ) : null}
+                      {!show ? (
+                        <Box sx={{ display: "flex", alignItems: "center" }}>
+                          <Button
+                            onClick={() => decrement(i.id)}
+                            sx={{
+                              border: "1px solid #acbac4",
+                              color: "black",
+                              marginRight: "5%",
+                            }}
+                          >
+                            -
+                          </Button>
+                          <Typography sx={{ marginRight: "5%" }}>
+                            {findProduct(i.id)}
+                          </Typography>
+                          <Button
+                            onClick={() => increment(i.id)}
+                            sx={{ border: "1px solid #acbac4", color: "black" }}
+                          >
+                            +
+                          </Button>
+                        </Box>
+                      ) : null}
 
-                  <Typography sx={{ color: "#2a2936", fontWeight: "500" }}>
-                    ${i.price}
-                  </Typography>
-                </Box>
-              </Item>
-            ))}
-                
-                </>
-            ):(
-                   "No any selected product"
+                      <Typography sx={{ color: "#2a2936", fontWeight: "500" }}>
+                        ${price(i)}
+                      </Typography>
+                    </Box>
+                  </Item>
+                ))}
+              </>
+            ) : (
+              "No any selected product"
             )}
-           
           </Stack>
         </Grid>
       </Item>
