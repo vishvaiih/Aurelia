@@ -43,31 +43,28 @@ function Cart() {
   };
 
 
+
   const decrement = (productid) => {
-   console.log(".....", productid);
-   console.log("cart", cart);
+    console.log(".....", productid);
+    console.log("cart", cart);
 
-   let changeQty = cart?.map((itm) =>
-     Number(itm.userId) === Number(getUserDetail)
-       ? {
-           ...itm,
-           items: itm?.items?.map((i) =>
-             Number(i.productId) === Number(productid)
-               ? { ...i, qty: Number(i.qty) - 1 }
-               : i
-           ),
-         }
-       : itm
-   );
+    let changeQty = cart?.map((itm) =>
+      Number(itm.userId) === Number(getUserDetail)
+        ? {
+            ...itm,
+            items: itm?.items?.map((i) =>
+              Number(i.productId) === Number(productid)
+                ? { ...i, qty: i.qty > 1 ? Number(i.qty) - 1 : 1 }
+                : i
+            ),
+          }
+        : itm
+    );
 
-   setCart(changeQty);
+    setCart(changeQty);
 
-   localStorage.setItem("cart", JSON.stringify(changeQty));
- };
-
-
-
-
+    localStorage.setItem("cart", JSON.stringify(changeQty));
+  };
 
   return (
     <>
@@ -77,7 +74,6 @@ function Cart() {
         increment={increment}
         decrement={decrement}
         findUser={findUser}
-      
       />
       <Footer />
     </>

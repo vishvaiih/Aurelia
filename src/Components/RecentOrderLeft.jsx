@@ -45,14 +45,16 @@ function RecentOrderLeft({ product, increment, decrement, findUser }) {
     const find = findUser?.items?.find((itm) => itm?.productId === productId);
     console.log("find", find);
 
-    return find?.qty;
+    return find?.qty ;
   };
+
 
   const price = (itm) => {
     console.log("itm", itm);
+  
 
-    const qty = findProduct(itm);
-    console.log("vbvbvb",product);
+    const qty = findProduct(itm.id);
+    console.log("qty",qty);
 
     const priceOfProduct = itm?.price * qty;
     console.log(priceOfProduct, "priceOfProduct");
@@ -162,7 +164,7 @@ function RecentOrderLeft({ product, increment, decrement, findUser }) {
                         </Box>
                       ) : null}
 
-                      <Typography sx={{ color: "#2a2936", fontWeight: "500" }}>
+                      <Typography sx={{ color: "#2a2936", fontWeight: "500",width:"10%" }}>
                         ${price(i)}
                       </Typography>
                     </Box>
