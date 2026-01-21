@@ -15,7 +15,7 @@ function WishList() {
       let findUser = wishList?.find((itm) => itm.userId == getUserDetail);
       console.log("findUser", findUser);
     
-      let findProduct = findUser?.items?.map((i) => i.productId);
+      let findProduct = findUser?.items?.map((i) => i);
       console.log("findProduct", findProduct);
     
       const product = products?.filter((i) => findProduct?.includes(i.id));

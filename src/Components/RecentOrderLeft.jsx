@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Box, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
@@ -8,13 +8,9 @@ import Stack from "@mui/material/Stack";
 
 import { useLocation } from "react-router-dom";
 
-function RecentOrderLeft({product}) {
- 
-
+function RecentOrderLeft({ product }) {
   const location = useLocation();
   const show = location.pathname == "/wishlist";
-
-  
 
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: "#fff",
@@ -104,9 +100,31 @@ function RecentOrderLeft({product}) {
                     width: "100%",
                   }}
                 >
-                  <Typography sx={{ color: "#2a2936", fontWeight: "500" }}>
+                  <Typography
+                    sx={{ color: "#2a2936", fontWeight: "500", width: "20%" }}
+                  >
                     {i.name}
                   </Typography>
+                  {!show ? (
+                    <Box sx={{ display: "flex", alignItems: "center" }}>
+                      <Button
+                        sx={{
+                          border: "1px solid #acbac4",
+                          color: "black",
+                          marginRight: "5%",
+                        }}
+                      >
+                        -
+                      </Button>
+                      <Typography sx={{ marginRight: "5%" }}>qty</Typography>
+                      <Button
+                        sx={{ border: "1px solid #acbac4", color: "black" }}
+                      >
+                        +
+                      </Button>
+                    </Box>
+                  ) : null}
+
                   <Typography sx={{ color: "#2a2936", fontWeight: "500" }}>
                     ${i.price}
                   </Typography>

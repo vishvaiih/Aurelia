@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Box, Typography, Button } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import { Heart, ShoppingBag } from "lucide-react";
@@ -14,10 +14,14 @@ function ProductList() {
 
   const { setCart, setWishList } = useContext(UserContext);
 
-  const [wish, setWish] = useState(false);
-
   let getUserDetail = JSON.parse(localStorage.getItem("userDetail"));
   let userId = getUserDetail;
+
+  let getWishList = JSON.parse(localStorage.getItem("wishlist")) || [];
+  console.log("getWishList", getWishList);
+
+  let wishList = getWishList?.find((itm) => itm?.userId == userId);
+  console.log("wishList", wishList);
 
   const addToCart = (itm) => {
     console.log(itm, ".....");
@@ -59,12 +63,7 @@ function ProductList() {
     console.log("/////", itm);
 
     let productId = itm?.id;
-
-    let getWishList = JSON.parse(localStorage.getItem("wishlist")) || [];
-    console.log("getWishList", getWishList);
-
-    let wishList = getWishList?.find((itm) => itm?.userId == userId);
-    console.log("wishList", wishList);
+    console.log("productid", productId);
 
     if (!wishList) {
       wishList = {
@@ -74,7 +73,7 @@ function ProductList() {
       getWishList.push(wishList);
     }
 
-    let product = wishList?.items?.find((itm) => itm?.productId == productId);
+    let product = wishList?.items?.find((itm) => itm == productId);
     console.log("product", product);
 
     // if (product) {
@@ -83,11 +82,7 @@ function ProductList() {
     // }
 
     if (product) {
-      wishList.items = wishList?.items?.filter(
-        (itm) => itm?.productId !== productId
-      );
-
-      setWish(!wish);
+      wishList.items = wishList?.items?.filter((itm) => itm !== productId);
 
       setWishList(getWishList);
 
@@ -96,14 +91,16 @@ function ProductList() {
       return;
     }
 
-    wishList?.items?.push({ productId });
+    wishList?.items?.push(productId);
 
     setWishList(getWishList);
 
     localStorage.setItem("wishlist", JSON.stringify(getWishList));
   };
 
-  console.log("..........", wish);
+  const wishlist = (productId) => {
+    return wishList?.items?.includes(productId);
+  };
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -164,10 +161,10 @@ function ProductList() {
               >
                 <Checkbox
                   {...label}
+                  checked={wishlist(itm.id)}
                   icon={<FavoriteBorder />}
                   checkedIcon={<Favorite />}
                   sx={{
-                    color: "default",
                     "&.Mui-checked": {
                       color: "red",
                     },
