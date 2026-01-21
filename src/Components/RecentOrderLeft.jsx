@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 import { Box, Button, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
@@ -7,11 +7,15 @@ import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 
 import { useLocation } from "react-router-dom";
+import { UserContext } from "../UseContext/UseContext";
 
-function RecentOrderLeft({ product,increment,qty }) {
+function RecentOrderLeft({ product,increment,decrement,findUser }) {
   // console.log("product......",product)
   const location = useLocation();
   const show = location.pathname == "/wishlist";
+  
+   const { cart } = useContext(UserContext);
+
 
  
 
@@ -40,7 +44,13 @@ function RecentOrderLeft({ product,increment,qty }) {
   //     },
   //   ];
 
- 
+ const findProduct = (productId) => {
+      const find = findUser?.items?.find((itm) => itm?.productId === productId)
+      console.log("find",find);
+
+      return  find.qty
+
+ }
 
  
 
@@ -48,7 +58,7 @@ function RecentOrderLeft({ product,increment,qty }) {
   return (
     <Grid size={8}>
       <Item sx={{ boxSizing: "border-box", borderRadius: "15px" }}>
-        {!show && (
+        {!show && cart?.length > 0 && (
           <Box
             sx={{
               display: "flex",
@@ -128,7 +138,9 @@ function RecentOrderLeft({ product,increment,qty }) {
                       >
                         -
                       </Button>
-                      <Typography sx={{ marginRight: "5%" }}>{qty}</Typography>
+                      <Typography sx={{ marginRight: "5%" }}>
+                          {findProduct(i.id)}
+                      </Typography>
                       <Button
                       onClick = {() => increment(i.id)}
                         sx={{ border: "1px solid #acbac4", color: "black" }}
