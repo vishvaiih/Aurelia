@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import RecentOrderLeft from "../Components/recentOrderLeft";
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
@@ -8,17 +8,34 @@ import { products } from "../Database/Database";
 function Cart() {
   const { cart, setCart } = useContext(UserContext);
 
+  const[product,setProduct] = useState("")
+  const[findUser,setFindUser] = useState("")
+
   console.log("....", cart);
   let getUserDetail = JSON.parse(localStorage.getItem("userDetail"));
 
-  let findUser = cart?.find((itm) => itm.userId == getUserDetail);
-  console.log("findUser", findUser);
+  useEffect(() => {
+   
 
-  let allProduct = findUser?.items?.map((i) => i.productId);
-  console.log("allProduct", allProduct);
+    let findUser = cart?.find((itm) => itm.userId == getUserDetail);
+    // console.log("findUser", findUser);
+  
+    let allProductId = findUser?.items?.map((i) => i.productId);
+    // console.log("allProductId", allProductId);
+  
+    const product = products?.filter((i) => allProductId?.includes(i.id));
+    // console.log("product", product);
+      
+    setProduct(product);
+    setFindUser(findUser);
 
-  const product = products?.filter((i) => allProduct?.includes(i.id));
-  console.log("product", product);
+  },[cart,getUserDetail])
+
+  console.log("....",product);
+  console.log("user",findUser );
+
+  
+   
 
   const increment = (productid) => {
     console.log(".....", productid);
@@ -42,8 +59,7 @@ function Cart() {
     localStorage.setItem("cart", JSON.stringify(changeQty));
   };
 
-
-
+  
   const decrement = (productid) => {
     console.log(".....", productid);
     console.log("cart", cart);

@@ -13,6 +13,7 @@ function RecentOrderLeft({ product, increment, decrement, findUser }) {
   // console.log("product......",product)
   const location = useLocation();
   const show = location.pathname == "/wishlist";
+  const showInCart = location.pathname == "/cart";
 
   const { cart } = useContext(UserContext);
 
@@ -45,30 +46,25 @@ function RecentOrderLeft({ product, increment, decrement, findUser }) {
     const find = findUser?.items?.find((itm) => itm?.productId === productId);
     console.log("find", find);
 
-    return find?.qty ;
+    return find?.qty;
   };
-
 
   const price = (itm) => {
     console.log("itm", itm);
-  
 
     const qty = findProduct(itm.id);
-    console.log("qty",qty);
+    console.log("qty", qty);
 
     const priceOfProduct = itm?.price * qty;
     console.log(priceOfProduct, "priceOfProduct");
 
     return priceOfProduct;
-    
   };
-
-  
 
   return (
     <Grid size={8}>
       <Item sx={{ boxSizing: "border-box", borderRadius: "15px" }}>
-        {!show && cart?.length > 0 && (
+        {!show && !showInCart && cart?.length > 0 && (
           <Box
             sx={{
               display: "flex",
@@ -164,9 +160,29 @@ function RecentOrderLeft({ product, increment, decrement, findUser }) {
                         </Box>
                       ) : null}
 
-                      <Typography sx={{ color: "#2a2936", fontWeight: "500",width:"10%" }}>
-                        ${price(i)}
+                      <Typography
+                        sx={{
+                          color: "#2a2936",
+                          fontWeight: "500",
+                          width: "10%",
+                        }}
+                      >
+                        {show ? `$${i.price}` : `$${price(i)}`}
                       </Typography>
+
+                      {!show ? (
+                        <Button
+                          sx={{
+                            border: "1px solid black",
+                            backgroundColor: "#c40c0c",
+                            borderRadius: "10px",
+                            color: "white",
+                            textTransform: "capitalize",
+                          }}
+                        >
+                          Delete
+                        </Button>
+                      ) : null}
                     </Box>
                   </Item>
                 ))}
