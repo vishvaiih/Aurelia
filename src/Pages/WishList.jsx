@@ -1,9 +1,13 @@
 import React, { useContext, useEffect,useState } from 'react'
 import Header from '../Components/Header'
 import Footer from '../Components/Footer'
-import RecentOrderLeft from '../Components/recentOrderLeft'
 import { products } from "../Database/Database";
 import { UserContext } from '../UseContext/UseContext';
+
+import Grid from "@mui/material/Grid";
+import Stack from "@mui/material/Stack";
+import RecentOrderLeftItem from '../Components/RecentOrderLeftItem';
+
 
 function WishList() {
 
@@ -33,7 +37,25 @@ function WishList() {
   return (
    <>
             <Header/>
-            <RecentOrderLeft product={product}/>
+            {/* <RecentOrderLeft product={product}/> */}
+
+
+            <Grid>
+          <Stack spacing={3}>
+            {product?.length > 0 ? (
+              <>
+                {product?.map((i) => (
+                 
+                         <RecentOrderLeftItem i={i}  />
+                         
+
+                ))}
+              </>
+            ) : (
+              "No any selected product"
+            )}
+          </Stack>
+        </Grid>
             <Footer/>
    </>
   )
