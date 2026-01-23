@@ -99,27 +99,15 @@ function Cart() {
   };
 
   const handleDelete = (id) => {
-    console.log(".....");
-    console.log("....", cartProduct);
-    const UpdatedData = cartProduct?.filter((i) => i.id !== id);
-    console.log("UpdatedData", UpdatedData);
-
-    const allIdOfUpdatedData = UpdatedData?.map((itm) => itm.id);
-    console.log("allIdOfUpdatedData", allIdOfUpdatedData); 
-
-    
     const deleteSelectedProduct = cart?.map((itm) =>
       Number(itm.userId) === Number(getUserDetail)
         ? {
             ...itm,
-            items: itm?.items?.filter((item) =>
-          
-            Number(item.productId) !== Number(id)
-                
-                 
+            items: itm?.items?.filter(
+              (item) => Number(item.productId) !== Number(id)
             ),
           }
-       :itm
+        : itm
     );
     console.log("deleteSelectedProduct", deleteSelectedProduct);
 

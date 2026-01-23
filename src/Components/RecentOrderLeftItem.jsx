@@ -2,8 +2,11 @@ import React from 'react';
 import { Box, Button, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
+import Checkbox from "@mui/material/Checkbox";
+import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
+import Favorite from "@mui/icons-material/Favorite";
 
-function RecentOrderLeftItem({i,incrementAction,decrementAction,priceOFCartProduct=() => {},typeCart,productQty=() => {},deleteAction}) {
+function RecentOrderLeftItem({i,incrementAction,decrementAction,priceOFCartProduct=() => {},typeCart,productQty=() => {},deleteAction,removeProductFromWhishlist}) {
 
     const Item = styled(Paper)(({ theme }) => ({
         backgroundColor: "#fff",
@@ -14,6 +17,9 @@ function RecentOrderLeftItem({i,incrementAction,decrementAction,priceOFCartProdu
           backgroundColor: "#1A2027",
         }),
       }));
+
+      const label = { slotProps: { input: { "aria-label": "Checkbox demo" } } };
+
 
   return (
      
@@ -108,7 +114,20 @@ function RecentOrderLeftItem({i,incrementAction,decrementAction,priceOFCartProdu
         >
           Delete
         </Button>
-      ) : null}
+      ) :  
+      <Checkbox
+       onClick={() => removeProductFromWhishlist(i.id)}
+        {...label}
+        checked={i}
+        icon={<FavoriteBorder />}
+        checkedIcon={<Favorite />}
+        sx={{
+          "&.Mui-checked": {
+            color: "red",
+          },
+        }}
+      />
+    }
     </Box>
   </Item>
 

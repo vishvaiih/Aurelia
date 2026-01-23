@@ -12,16 +12,17 @@ import { useLocation } from 'react-router-dom';
 
 function WishList() {
 
-     const { wishList } = useContext(UserContext);
+     const { wishList,setWishList } = useContext(UserContext);
 
      const [wishListProduct,setWishListProduct] = useState("")
 
-   
+
+     let getUserDetail = JSON.parse(localStorage.getItem("userDetail"));
 
      useEffect(() => {
 
       // console.log("....vvvv", wishList);
-      let getUserDetail = JSON.parse(localStorage.getItem("userDetail"));
+    
     
       let findUser = wishList?.find((itm) => itm.userId == getUserDetail);
       // console.log("findUser", findUser);
@@ -33,10 +34,31 @@ function WishList() {
       // console.log("product", product);
 
       setWishListProduct(wishListProduct);
-     },[])
-    
- 
-         
+     },[wishList])
+
+
+     const  removeProductFromWhishlist = (id) => {
+       console.log("....",id);
+
+
+       const removeSelectedProduct = wishList?.map((itm) =>
+        Number(itm.userId) === Number(getUserDetail)
+          ? {
+              ...itm,
+              items: itm?.items?.filter(
+                (item) => Number(item) !== Number(id)
+              ),
+            }
+          : itm
+      );
+
+      console.log("removeSelectedProduct",removeSelectedProduct)
+
+      setWishList(removeSelectedProduct)
+
+      localStorage.setItem("wishlist",JSON.stringify(removeSelectedProduct))
+     }
+
 
   return (
    <>
@@ -50,7 +72,7 @@ function WishList() {
               <>
                 {wishListProduct?.map((i) => (
                  
-                         <RecentOrderLeftItem i={i} key={i.id} />
+                         <RecentOrderLeftItem i={i} key={i.id} removeProductFromWhishlist={removeProductFromWhishlist} />
                          
 
                 ))}
