@@ -8,6 +8,7 @@ import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import RecentOrderLeftItem from '../Components/RecentOrderLeftItem';
 import { useLocation } from 'react-router-dom';
+import { Typography } from '@mui/material';
 
 
 function WishList() {
@@ -21,25 +22,21 @@ function WishList() {
 
      useEffect(() => {
 
-      // console.log("....vvvv", wishList);
-    
+      
     
       let findUser = wishList?.find((itm) => itm.userId == getUserDetail);
-      // console.log("findUser", findUser);
+     
     
       let allProductId = findUser?.items?.map((i) => i);
-      // console.log("allProductId", allProductId);
-    
+     
       const wishListProduct = products?.filter((i) => allProductId?.includes(i.id));
-      // console.log("product", product);
-
+      
       setWishListProduct(wishListProduct);
      },[wishList])
 
 
      const  removeProductFromWhishlist = (id) => {
        console.log("....",id);
-
 
        const removeSelectedProduct = wishList?.map((itm) =>
         Number(itm.userId) === Number(getUserDetail)
@@ -52,19 +49,18 @@ function WishList() {
           : itm
       );
 
-      console.log("removeSelectedProduct",removeSelectedProduct)
+     
 
       setWishList(removeSelectedProduct)
 
       localStorage.setItem("wishlist",JSON.stringify(removeSelectedProduct))
      }
 
-
   return (
    <>
             <Header/>
             {/* <RecentOrderLeft product={product}/> */}
-
+            <Typography sx={{fontSize:"22px",margin:" 10px 55px",fontFamily:"serif"}}>WishList</Typography>
 
             <Grid>
           <Stack spacing={3}>

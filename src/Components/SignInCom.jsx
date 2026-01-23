@@ -12,8 +12,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 function SignInCom() {
-
-    const navigation = useNavigate(); 
+  const navigation = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -27,47 +26,47 @@ function SignInCom() {
   };
 
   const validationSchema = yup.object({
-         
-          email: yup
-            .string("Enter your email")
-            .email("Enter a valid email")
-            .required("Email is required"),
-          password: yup
-            .string("Enter your password")
-            .min(8, "Password should be of minimum 8 characters length")
-            .required("Password is required"),
-        });
-      
-        const formik = useFormik({
-          initialValues: {
-            email: "",
-            password: "",
-          },
-          validationSchema: validationSchema,
-          onSubmit: (values) => {
-           console.log("values",values)
+    email: yup
+      .string("Enter your email")
+      .email("Enter a valid email")
+      .required("Email is required"),
+    password: yup
+      .string("Enter your password")
+      .min(8, "Password should be of minimum 8 characters length")
+      .required("Password is required"),
+  });
 
-           let getItem = JSON.parse(localStorage.getItem("data"))
-           console.log("getItem",getItem);
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      console.log("values", values);
 
-           const filterDataByEmail = getItem?.find((i) => i?.email == values.email)
-           console.log("filterDataByEmail",filterDataByEmail);
+      let getItem = JSON.parse(localStorage.getItem("data"));
+      console.log("getItem", getItem);
 
-           if(filterDataByEmail){
-             if(filterDataByEmail?.password === values.password){
-                localStorage.setItem("userDetail",JSON.stringify(filterDataByEmail?.id))
-                toast.success("logIn successfully")
-                navigation("/")
-             }else{
-                toast.error("password is wrong")
-             }
-           }else{
-             toast.error("user not found")
-           }
+      const filterDataByEmail = getItem?.find((i) => i?.email == values.email);
+      console.log("filterDataByEmail", filterDataByEmail);
 
-          
-            
-        }});
+      if (filterDataByEmail) {
+        if (filterDataByEmail?.password === values.password) {
+          localStorage.setItem(
+            "userDetail",
+            JSON.stringify(filterDataByEmail?.id)
+          );
+          toast.success("logIn successfully");
+          navigation("/");
+        } else {
+          toast.error("password is wrong");
+        }
+      } else {
+        toast.error("user not found");
+      }
+    },
+  });
 
   return (
     <>
@@ -84,7 +83,7 @@ function SignInCom() {
           Email Address
         </Typography>
         <TextField
-         color="warning"
+          color="warning"
           fullWidth
           placeholder="Email"
           name="email"
@@ -94,14 +93,14 @@ function SignInCom() {
               height: "46px",
               paddingTop: "0px",
               paddingBottom: "0px",
-              boxShadow:"0px 0px 4px 0px #e0dbd1"
+              boxShadow: "0px 0px 4px 0px #e0dbd1",
             },
           }}
-            value={formik.values.email}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            error={formik.touched.email && Boolean(formik.errors.email)}
-            helperText={formik.touched.email && formik.errors.email}
+          value={formik.values.email}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          error={formik.touched.email && Boolean(formik.errors.email)}
+          helperText={formik.touched.email && formik.errors.email}
         />
       </Box>
 
@@ -118,7 +117,7 @@ function SignInCom() {
           Password
         </Typography>
         <TextField
-         color="warning"
+          color="warning"
           name="password"
           placeholder="Password"
           fullWidth
@@ -127,7 +126,7 @@ function SignInCom() {
               height: "46px",
               paddingTop: "0px",
               paddingBottom: "0px",
-              boxShadow:"0px 0px 4px 0px #e0dbd1"
+              boxShadow: "0px 0px 4px 0px #e0dbd1",
             },
           }}
           id="outlined-adornment-password"
@@ -153,11 +152,11 @@ function SignInCom() {
               ),
             },
           }}
-            value={formik.values.password}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            error={formik.touched.password && Boolean(formik.errors.password)}
-            helperText={formik.touched.password && formik.errors.password}
+          value={formik.values.password}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          error={formik.touched.password && Boolean(formik.errors.password)}
+          helperText={formik.touched.password && formik.errors.password}
         />
       </Box>
 

@@ -1,15 +1,15 @@
 import React from "react";
-import { Box, Typography, MenuItem} from "@mui/material";
+import { Box, Typography, MenuItem } from "@mui/material";
 import { Funnel } from "lucide-react";
 import TextField from "@mui/material/TextField";
 
 function Filters() {
-    const option = [
-        "Featured",
-        "Newest",
-        "Price : Low to High",
-        "Price : High to Low",
-      ];
+  const option = [
+    "Featured",
+    "Newest",
+    "Price : Low to High",
+    "Price : High to Low",
+  ];
   return (
     <Box sx={{ display: "flex", justifyContent: "space-between" }}>
       <Box sx={{ display: "flex", color: "#54514e" }}>

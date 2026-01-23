@@ -19,7 +19,6 @@ import QuickActionData from "./QuickActionData";
 import { useNavigate } from "react-router-dom";
 
 function QuickAction() {
-
   const navigation = useNavigate();
 
   const Item = styled(Paper)(({ theme }) => ({
@@ -32,15 +31,12 @@ function QuickAction() {
     }),
   }));
 
- 
-  
-
   const quickActionData = [
     {
       icon: <User />,
       title: " Edit Profile",
       description: "   Update Your personal information",
-      route:"/profile/edit",
+      route: "/profile/edit",
     },
     {
       icon: <Package />,
@@ -74,8 +70,6 @@ function QuickAction() {
     },
   ];
 
- 
-
   return (
     <>
       <Grid container spacing={2} sx={{ margin: "4% 5% 0% 5%" }}>
@@ -94,10 +88,7 @@ function QuickAction() {
               sx={{ marginTop: "16px" }}
             >
               {quickActionData.map((itm) => (
-                
-                 <QuickActionData itm={itm} />
-
-
+                <QuickActionData itm={itm} />
               ))}
             </Grid>
           </Item>
@@ -137,7 +128,10 @@ function QuickAction() {
             ))}
             <Box sx={{ display: "flex", margin: "0px 10px" }}>
               <LogoutOutlinedIcon sx={{ color: "#df2b43" }} />
-              <Typography  onClick = {() => navigation("/login")} sx={{ marginLeft: "10px", color: "#df2b43" }}>
+              <Typography
+                onClick={() => navigation("/login")}
+                sx={{ marginLeft: "10px", color: "#df2b43" }}
+              >
                 Sign Out
               </Typography>
             </Box>

@@ -6,7 +6,6 @@ import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import RecentOrderLeft from "./recentOrderLeft";
 
-
 function RecentOrders() {
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: "#fff",
@@ -18,14 +17,11 @@ function RecentOrders() {
     }),
   }));
 
- 
   return (
     <>
       <Box sx={{ flexGrow: 1, margin: "3% 5%", minHeight: "30vh" }}>
         <Grid container spacing={2}>
-         
-             <RecentOrderLeft/>
-
+          <RecentOrderLeft />
 
           <Grid size={4}>
             <Stack spacing={3}>

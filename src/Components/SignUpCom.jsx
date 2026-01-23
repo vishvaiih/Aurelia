@@ -79,14 +79,14 @@ function SignUpCom() {
           let data = JSON.parse(localStorage.getItem("data"));
     
           let filterData = data?.find((i) => i?.email == values?.email);
-          console.log("filterData", filterData);
+         
     
           if (filterData) {
             toast.error("Email is already exist");
             return;
           }
     
-          console.log("values", values);
+         
 
           const  newUser = {
             ...values,

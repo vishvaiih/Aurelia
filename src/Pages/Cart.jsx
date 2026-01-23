@@ -8,6 +8,7 @@ import RecentOrderLeftItem from "../Components/RecentOrderLeftItem";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import { useLocation } from "react-router-dom";
+import { Typography } from "@mui/material";
 
 function Cart() {
   const { cart, setCart } = useContext(UserContext);
@@ -23,22 +24,16 @@ function Cart() {
 
   useEffect(() => {
     let findUser = cart?.find((itm) => itm.userId == getUserDetail);
-    // console.log("findUser", findUser);
 
     let allProductId = findUser?.items?.map((i) => i.productId);
-    console.log("allProductId", allProductId);
 
     const cartProduct = products?.filter((i) => allProductId?.includes(i.id));
-    // console.log("product", product);
 
     setCartProduct(cartProduct);
     setFindUser(findUser);
   }, [cart, getUserDetail]);
 
   const increment = (productid) => {
-    console.log(".....", productid);
-    console.log("cart", cart);
-
     let changeQty = cart?.map((itm) =>
       Number(itm.userId) === Number(getUserDetail)
         ? {
@@ -58,9 +53,6 @@ function Cart() {
   };
 
   const decrement = (productid) => {
-    console.log(".....", productid);
-    console.log("cart", cart);
-
     let changeQty = cart?.map((itm) =>
       Number(itm.userId) === Number(getUserDetail)
         ? {
@@ -81,19 +73,14 @@ function Cart() {
 
   const productQty = (productId) => {
     const find = findUser?.items?.find((itm) => itm?.productId === productId);
-    console.log("find", find);
 
     return find?.qty;
   };
 
   const priceOFCartProduct = (itm) => {
-    console.log("itm", itm);
-
     const qty = productQty(itm.id);
-    console.log("qty", qty);
 
     const priceOfProduct = itm?.price * qty;
-    console.log(priceOfProduct, "priceOfProduct");
 
     return priceOfProduct;
   };
@@ -109,7 +96,6 @@ function Cart() {
           }
         : itm
     );
-    console.log("deleteSelectedProduct", deleteSelectedProduct);
 
     setCart(deleteSelectedProduct);
 
@@ -125,6 +111,12 @@ function Cart() {
         decrement={decrement}
         findUser={findUser}
       /> */}
+      <Typography
+        sx={{ fontSize: "22px", margin: " 10px 55px", fontFamily: "serif" }}
+      >
+        Cart List
+      </Typography>
+
       <Grid>
         <Stack spacing={3}>
           {cartProduct?.length > 0 ? (

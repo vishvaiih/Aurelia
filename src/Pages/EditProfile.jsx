@@ -48,7 +48,6 @@ function EditProfile() {
       .required("Address is required")
       .matches(/^\d+\s+[A-Za-z\s]+$/, "Format must be like: 123 Luxury Lane"),
     city: yup.string("Enter your city").required("city is required"),
-  
   });
 
   const formik = useFormik({
@@ -64,21 +63,17 @@ function EditProfile() {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      console.log("values", values);
-          
-      let UpdatedData = getData?.map((itm) => itm.id === getUserDetail ?{ ...itm, ...values } : itm)
-      console.log("UpdatedData",UpdatedData);
+      let UpdatedData = getData?.map((itm) =>
+        itm.id === getUserDetail ? { ...itm, ...values } : itm
+      );
 
-      localStorage.setItem("data",JSON.stringify(UpdatedData))
+      localStorage.setItem("data", JSON.stringify(UpdatedData));
 
-      setData(UpdatedData)
+      setData(UpdatedData);
 
-      navigation(-1)
-     
+      navigation(-1);
     },
   });
-
-  
 
   return (
     <>
@@ -92,14 +87,14 @@ function EditProfile() {
           }}
         >
           <Box
-            sx={{ display: "flex", alignItems: "center",cursor:"pointer"  }}
+            sx={{ display: "flex", alignItems: "center", cursor: "pointer" }}
             onClick={() => navigation(-1)}
           >
             <ArrowLeft
               style={{ color: "#a6a096", marginRight: "10px" }}
               size={17}
             />
-            <Typography sx={{ color: "#a6a096"}}>Back to Profile</Typography>
+            <Typography sx={{ color: "#a6a096" }}>Back to Profile</Typography>
           </Box>
 
           <Typography
@@ -290,17 +285,15 @@ function EditProfile() {
                 }}
                 value={formik.values.number}
                 onChange={(e) => {
-                  if(e.target.value >= 0) {
-                    formik.handleChange(e)
+                  if (e.target.value >= 0) {
+                    formik.handleChange(e);
                   }
                 }}
-                
                 onBlur={formik.handleBlur}
                 error={formik.touched.number && Boolean(formik.errors.number)}
                 helperText={formik.touched.number && formik.errors.number}
               />
             </Box>
-
           </Box>
 
           <Box
@@ -455,7 +448,7 @@ function EditProfile() {
             }}
           >
             <Button
-             onClick={() => navigation(-1)}
+              onClick={() => navigation(-1)}
               sx={{
                 border: "1px solid #e1e1df",
                 color: "#2a2d2f",

@@ -28,7 +28,6 @@ function ShopAll() {
 
           <ProductList />
         </Box>
-        
       </Box>
 
       <Footer />

@@ -13,15 +13,14 @@ function SignUp() {
 
   return (
     <>
-      <Box sx={{ display: "flex" ,overflow: "hidden"}}>
-        <Box sx={{ width: "50%", }}>
+      <Box sx={{ display: "flex", overflow: "hidden" }}>
+        <Box sx={{ width: "50%" }}>
           <img
             src={signup ? "./images/signup.png" : "./images/login.png"}
-            style={{ width: "100%", height: "100%"
-               }}
+            style={{ width: "100%", height: "100%" }}
           />
         </Box>
-        <Box sx={{ width: "50%",backgroundColor:"#fbfaf8"}}>
+        <Box sx={{ width: "50%", backgroundColor: "#fbfaf8" }}>
           <Box
             sx={{
               margin: "70px auto 25px",

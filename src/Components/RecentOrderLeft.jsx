@@ -10,7 +10,13 @@ import { useLocation } from "react-router-dom";
 import { UserContext } from "../UseContext/UseContext";
 import RecentOrderLeftItem from "./RecentOrderLeftItem";
 
-function RecentOrderLeft({ product, increment, decrement,findProduct, price}) {
+function RecentOrderLeft({
+  product,
+  increment,
+  decrement,
+  findProduct,
+  price,
+}) {
   // console.log("product......",product)
   const location = useLocation();
   const show = location.pathname == "/wishlist";
@@ -43,8 +49,6 @@ function RecentOrderLeft({ product, increment, decrement,findProduct, price}) {
   //     },
   //   ];
 
- 
-
   return (
     <Grid size={8}>
       <Item sx={{ boxSizing: "border-box", borderRadius: "15px" }}>
@@ -76,9 +80,7 @@ function RecentOrderLeft({ product, increment, decrement,findProduct, price}) {
             {product?.length > 0 ? (
               <>
                 {product?.map((i) => (
-                 
-                         <RecentOrderLeftItem i={i}   />
-
+                  <RecentOrderLeftItem i={i} />
                 ))}
               </>
             ) : (

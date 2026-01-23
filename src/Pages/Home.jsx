@@ -1,17 +1,14 @@
-import React from 'react'
-import Header from '../Components/Header'
-import Banner from '../Components/Banner'
-
+import React from "react";
+import Header from "../Components/Header";
+import Banner from "../Components/Banner";
 
 function Home() {
   return (
-   <>
-
-   <Header/>
-   <Banner/>
-  
-   </>
-  )
+    <>
+      <Header />
+      <Banner />
+    </>
+  );
 }
 
-export default Home
+export default Home;
