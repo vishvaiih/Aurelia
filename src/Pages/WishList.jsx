@@ -7,13 +7,16 @@ import { UserContext } from '../UseContext/UseContext';
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import RecentOrderLeftItem from '../Components/RecentOrderLeftItem';
+import { useLocation } from 'react-router-dom';
 
 
 function WishList() {
 
      const { wishList } = useContext(UserContext);
 
-     const [product,setProduct] = useState("")
+     const [wishListProduct,setWishListProduct] = useState("")
+
+   
 
      useEffect(() => {
 
@@ -23,15 +26,16 @@ function WishList() {
       let findUser = wishList?.find((itm) => itm.userId == getUserDetail);
       // console.log("findUser", findUser);
     
-      let findProduct = findUser?.items?.map((i) => i);
-      // console.log("findProduct", findProduct);
+      let allProductId = findUser?.items?.map((i) => i);
+      // console.log("allProductId", allProductId);
     
-      const product = products?.filter((i) => findProduct?.includes(i.id));
+      const wishListProduct = products?.filter((i) => allProductId?.includes(i.id));
       // console.log("product", product);
 
-      setProduct(product);
+      setWishListProduct(wishListProduct);
      },[])
     
+ 
          
 
   return (
@@ -42,11 +46,11 @@ function WishList() {
 
             <Grid>
           <Stack spacing={3}>
-            {product?.length > 0 ? (
+            {wishListProduct?.length > 0 ? (
               <>
-                {product?.map((i) => (
+                {wishListProduct?.map((i) => (
                  
-                         <RecentOrderLeftItem i={i}  />
+                         <RecentOrderLeftItem i={i} key={i.id} />
                          
 
                 ))}

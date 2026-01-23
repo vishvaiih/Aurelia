@@ -7,11 +7,15 @@ import { products } from "../Database/Database";
 import RecentOrderLeftItem from "../Components/RecentOrderLeftItem";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
+import { useLocation } from "react-router-dom";
 
 function Cart() {
   const { cart, setCart } = useContext(UserContext);
 
-  const [product, setProduct] = useState("");
+  const location = useLocation();
+  const typeCart = location.pathname == "/cart";
+
+  const [cartProduct, setCartProduct] = useState("");
   const [findUser, setFindUser] = useState("");
 
   console.log("....", cart);
@@ -22,16 +26,14 @@ function Cart() {
     // console.log("findUser", findUser);
 
     let allProductId = findUser?.items?.map((i) => i.productId);
-    // console.log("allProductId", allProductId);
+    console.log("allProductId", allProductId);
 
-    const product = products?.filter((i) => allProductId?.includes(i.id));
+    const cartProduct = products?.filter((i) => allProductId?.includes(i.id));
     // console.log("product", product);
 
-    setProduct(product);
+    setCartProduct(cartProduct);
     setFindUser(findUser);
   }, [cart, getUserDetail]);
-
-  
 
   const increment = (productid) => {
     console.log(".....", productid);
@@ -77,23 +79,53 @@ function Cart() {
     localStorage.setItem("cart", JSON.stringify(changeQty));
   };
 
-  const findProduct = (productId) => {
+  const productQty = (productId) => {
     const find = findUser?.items?.find((itm) => itm?.productId === productId);
     console.log("find", find);
 
     return find?.qty;
   };
 
-  const price = (itm) => {
+  const priceOFCartProduct = (itm) => {
     console.log("itm", itm);
 
-    const qty = findProduct(itm.id);
+    const qty = productQty(itm.id);
     console.log("qty", qty);
 
     const priceOfProduct = itm?.price * qty;
     console.log(priceOfProduct, "priceOfProduct");
 
     return priceOfProduct;
+  };
+
+  const handleDelete = (id) => {
+    console.log(".....");
+    console.log("....", cartProduct);
+    const UpdatedData = cartProduct?.filter((i) => i.id !== id);
+    console.log("UpdatedData", UpdatedData);
+
+    const allIdOfUpdatedData = UpdatedData?.map((itm) => itm.id);
+    console.log("allIdOfUpdatedData", allIdOfUpdatedData); 
+
+    
+    const deleteSelectedProduct = cart?.map((itm) =>
+      Number(itm.userId) === Number(getUserDetail)
+        ? {
+            ...itm,
+            items: itm?.items?.filter((item) =>
+          
+            Number(item.productId) !== Number(id)
+                
+                 
+            ),
+          }
+       :itm
+    );
+    console.log("deleteSelectedProduct", deleteSelectedProduct);
+
+    setCart(deleteSelectedProduct);
+
+    localStorage.setItem("cart", JSON.stringify(deleteSelectedProduct));
   };
 
   return (
@@ -107,16 +139,17 @@ function Cart() {
       /> */}
       <Grid>
         <Stack spacing={3}>
-          {product?.length > 0 ? (
+          {cartProduct?.length > 0 ? (
             <>
-              {product?.map((i) => (
+              {cartProduct?.map((i) => (
                 <RecentOrderLeftItem
                   i={i}
-                  increment={increment}
-                  decrement={decrement}
-                  price={price}
-                 
-                  findProduct={findProduct}
+                  incrementAction={increment}
+                  decrementAction={decrement}
+                  priceOFCartProduct={priceOFCartProduct}
+                  typeCart={typeCart}
+                  productQty={productQty}
+                  deleteAction={handleDelete}
                 />
               ))}
             </>

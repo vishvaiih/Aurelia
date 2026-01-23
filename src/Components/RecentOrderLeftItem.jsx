@@ -3,7 +3,7 @@ import { Box, Button, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 
-function RecentOrderLeftItem({i,increment,decrement,price,show,findProduct}) {
+function RecentOrderLeftItem({i,incrementAction,decrementAction,priceOFCartProduct=() => {},typeCart,productQty=() => {},deleteAction}) {
 
     const Item = styled(Paper)(({ theme }) => ({
         backgroundColor: "#fff",
@@ -61,10 +61,10 @@ function RecentOrderLeftItem({i,increment,decrement,price,show,findProduct}) {
       >
         {i.name}
       </Typography>
-      {!show ? (
+      {typeCart ? (
         <Box sx={{ display: "flex", alignItems: "center" }}>
           <Button
-            onClick={() => decrement(i.id)}
+            onClick={() => decrementAction(i.id)}
             sx={{
               border: "1px solid #acbac4",
               color: "black",
@@ -74,10 +74,10 @@ function RecentOrderLeftItem({i,increment,decrement,price,show,findProduct}) {
             -
           </Button>
           <Typography sx={{ marginRight: "5%" }}>
-            {findProduct(i.id)}
+            {productQty(i.id)}
           </Typography>
           <Button
-            onClick={() => increment(i.id)}
+            onClick={() => incrementAction(i.id)}
             sx={{ border: "1px solid #acbac4", color: "black" }}
           >
             +
@@ -92,11 +92,12 @@ function RecentOrderLeftItem({i,increment,decrement,price,show,findProduct}) {
           width: "10%",
         }}
       >
-        {show ? `$${i.price}` : `$${price(i)}`}
+        {!typeCart ? `$${i.price}` : `$${priceOFCartProduct(i)}`}
       </Typography>
 
-      {!show ? (
+      {typeCart ? (
         <Button
+        onClick = {() => deleteAction(i.id)}
           sx={{
             border: "1px solid black",
             backgroundColor: "#c40c0c",
