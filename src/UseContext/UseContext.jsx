@@ -18,14 +18,9 @@ export const UserProvider = ({ children }) => {
     return getWishList;
   });
 
-  
-
-  
-
   const addToCart = (itm) => {
-
     let getUserDetail = JSON.parse(localStorage.getItem("userDetail"));
-   let userId = getUserDetail;
+    let userId = getUserDetail;
 
     let productId = itm?.id;
 
@@ -58,11 +53,15 @@ export const UserProvider = ({ children }) => {
   };
 
   const addToWishList = (itm) => {
+    let getUserDetail = JSON.parse(localStorage.getItem("userDetail"));
+    let userId = getUserDetail;
+
+    
+
     let getWishList = JSON.parse(localStorage.getItem("wishlist")) || [];
 
     let wishList = getWishList?.find((itm) => itm?.userId == userId);
     let productId = itm?.id;
-
 
     if (!wishList) {
       wishList = {
@@ -97,6 +96,9 @@ export const UserProvider = ({ children }) => {
   };
 
   const wishlist = (productId) => {
+    let getUserDetail = JSON.parse(localStorage.getItem("userDetail"));
+    let userId = getUserDetail;
+
     let getWishList = JSON.parse(localStorage.getItem("wishlist")) || [];
 
     let wishList = getWishList?.find((itm) => itm?.userId == userId);
@@ -106,7 +108,17 @@ export const UserProvider = ({ children }) => {
 
   return (
     <UserContext.Provider
-      value={{ data, setData, cart, setCart, wishList, setWishList ,addToCart,addToWishList,wishlist}}
+      value={{
+        data,
+        setData,
+        cart,
+        setCart,
+        wishList,
+        setWishList,
+        addToCart,
+        addToWishList,
+        wishlist,
+      }}
     >
       {children}
     </UserContext.Provider>

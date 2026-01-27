@@ -29,7 +29,7 @@ function ProductList() {
       >
         {products.map((itm) => (
           
-               <SingleProduct key={itm.id} itm={itm} addToCart={addToCart} addToWishList={addToWishList}  wishlist={wishlist}/>
+               <SingleProduct key={itm.id} itm={itm} />
 
 
         ))}
