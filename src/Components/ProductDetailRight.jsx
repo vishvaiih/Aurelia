@@ -2,6 +2,9 @@ import React from "react";
 import { Box, Button, Typography } from "@mui/material";
 import Rating from "@mui/material/Rating";
 import DoneOutlinedIcon from '@mui/icons-material/DoneOutlined';
+import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
+import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import { Truck } from "lucide-react";
 
 function ProductDetailRight() {
   return (
@@ -10,8 +13,9 @@ function ProductDetailRight() {
         <Box
           sx={{
             width: "95%",
-            border: "2px solid",
-            height: "90vh",
+            border:"2px solid black",
+            // borderBottom: "1px solid #e7e2da",
+            minHeight: "79vh",
             margin: "0px auto",
           }}
         >
@@ -118,6 +122,30 @@ function ProductDetailRight() {
                  <Typography >In Stock</Typography>
               </Box>
           </Box>
+
+          <Box>
+              <Button sx={{color:"#2a2622",textTransform:"capitalize",border:"1px solid #b68a1b",backgroundColor:"#d8aa33",width:"82%",height:"9vh",borderRadius:"10px",marginRight:"3%"}}>
+                <LocalMallOutlinedIcon style={{width:"18px",height:"18px",marginRight:"3%"}}/>
+                <Typography>Add to Cart</Typography>
+              </Button>
+              <Button sx={{border:"1px solid #e1e1df",color:"#2a2622",width:"14%",height:"9vh",borderRadius:"10px"}}>
+                   <FavoriteBorderOutlinedIcon style={{width:"18px",height:"18px"}}/>
+              </Button>
+          </Box>
+        </Box>
+
+        <Box sx={{minHeight:"25vh",border:"2px solid", width: "95%",margin:"0px auto"}}>
+
+            <Box sx={{width:"33%"}}>
+                <Truck style={{color:"#d9a520"}} />
+                <Typography>Free Shipping</Typography>
+                <Typography sx={{color:"Orders over $500"}}>Orders over $500</Typography>
+            </Box>
+
+            <Box>
+                
+            </Box>
+
         </Box>
       </Box>
     </>
