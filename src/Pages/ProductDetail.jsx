@@ -1,15 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../Components/Header";
 import { Box, Typography } from "@mui/material";
 import Footer from "../Components/Footer";
 import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
 import ProductDetailLeft from "../Components/ProductDetailLeft";
 import { useParams } from "react-router-dom";
+import { products } from "../Database/Database";
+import ProductDetailRight from "../Components/ProductDetailRight";
 
 function ProductDetail() {
 
     const params = useParams();
     const productId = params.id;
+
+    const [selectedProduct, setSelectedProduct] = useState(null);
+    
+      useEffect(() => {
+        const findProduct = products?.find((itm) => itm.id == productId);
+        console.log("findProduct", findProduct);
+    
+        setSelectedProduct(findProduct);
+      }, [productId]);
 
 
   return (
@@ -38,8 +49,10 @@ function ProductDetail() {
             <Typography>Back To Shop</Typography>
           </Box>
 
-          <Box sx={{minHeight:"90vh"}}>
-                <ProductDetailLeft productId={productId}/>
+          <Box sx={{minHeight:"90vh",display:"flex"}}>
+                <ProductDetailLeft selectedProduct={selectedProduct} />
+
+                <ProductDetailRight selectedProduct={selectedProduct}/>
 
 
           </Box>
