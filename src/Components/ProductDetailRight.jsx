@@ -1,27 +1,49 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Box, Button, Typography } from "@mui/material";
 import Rating from "@mui/material/Rating";
-import DoneOutlinedIcon from '@mui/icons-material/DoneOutlined';
-import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
-import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
-import { Truck } from "lucide-react";
+import DoneOutlinedIcon from "@mui/icons-material/DoneOutlined";
+import LocalMallOutlinedIcon from "@mui/icons-material/LocalMallOutlined";
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import { Truck, RotateCcw } from "lucide-react";
+import ShieldOutlinedIcon from "@mui/icons-material/ShieldOutlined";
+import { UserContext } from "../UseContext/UseContext";
 
-function ProductDetailRight() {
+function ProductDetailRight({ selectedProduct }) {
+  const freeShipping = [
+    {
+      icon: <Truck />,
+      title: "Free Shipping",
+      description: "Orders over $500",
+    },
+    {
+      icon: <RotateCcw />,
+      title: "30-Day Returns",
+      description: "Hassle-free",
+    },
+    {
+      icon: <ShieldOutlinedIcon />,
+      title: "Certified",
+      description: "Authentic materials",
+    },
+  ];
+
+    const { cart } = useContext(UserContext);
+
   return (
     <>
-      <Box sx={{ minHeight: "90vh", width: "50%", border: "2px solid" }}>
+      <Box sx={{ minHeight: "90vh", width: "50%" }}>
         <Box
           sx={{
             width: "95%",
-            border:"2px solid black",
-            // borderBottom: "1px solid #e7e2da",
-            minHeight: "79vh",
+
+            borderBottom: "1px solid #e7e2da",
+            minHeight: "76vh",
             margin: "0px auto",
           }}
         >
           <Box sx={{ display: "flex", color: "#7e7367", alignItems: "center" }}>
             <Typography sx={{ textTransform: "capitalize", fontSize: "15px" }}>
-              GOLD
+              {selectedProduct?.category}
             </Typography>
             <Box
               sx={{
@@ -33,7 +55,7 @@ function ProductDetailRight() {
               }}
             ></Box>
             <Typography sx={{ textTransform: "capitalize", fontSize: "15px" }}>
-              RINGS
+              {selectedProduct?.type}
             </Typography>
           </Box>
 
@@ -45,7 +67,7 @@ function ProductDetailRight() {
               letterSpacing: "1%",
             }}
           >
-            Eternal Gold Ring
+            {selectedProduct?.name}
           </Typography>
 
           <Box sx={{ display: "flex", margin: "2% 0%" }}>
@@ -68,84 +90,140 @@ function ProductDetailRight() {
 
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <Typography sx={{ fontSize: "30px", color: "#daa520" }}>
-              $1,299
+              ${selectedProduct?.price}
             </Typography>
-            <Typography
-              sx={{
-                fontSize: "20px",
-                color: "#7e7367",
-                margin: "0% 2%",
-                textDecoration: "line-through",
-              }}
-            >
-              $1,599
-            </Typography>
-            <Button
-              sx={{
-                color: "white",
-                backgroundColor: "#dc2828",
-                borderRadius: "30px",
-                textTransform: "capitalize",
-                padding: "1px 10px",
-                fontSize: "15px",
-              }}
-            >
-              Save $300
-            </Button>
+
+            {selectedProduct?.originalPrice && (
+              <>
+                <Typography
+                  sx={{
+                    fontSize: "20px",
+                    color: "#7e7367",
+                    margin: "0% 2%",
+                    textDecoration: "line-through",
+                  }}
+                >
+                  ${selectedProduct?.originalPrice}
+                </Typography>
+                <Button
+                  sx={{
+                    color: "white",
+                    backgroundColor: "#dc2828",
+                    borderRadius: "30px",
+                    textTransform: "capitalize",
+                    padding: "1px 10px",
+                    fontSize: "15px",
+                  }}
+                >
+                  Save $
+                  {selectedProduct?.originalPrice - selectedProduct?.price}
+                </Button>
+              </>
+            )}
           </Box>
 
-          <Typography sx={{color:"#7e7367",margin:"3% 0%"}}>
-            A stunning 18K gold ring featuring intricate filigree work and a
-            timeless design that symbolizes eternal love. 
+          <Typography sx={{ color: "#7e7367", margin: "3% 0%" }}>
+            {selectedProduct?.description}
           </Typography>
 
-          <Box sx={{height:"12vh",backgroundColor:"#f6f5f2",borderRadius:"25px",display:"flex",alignItems:"center"}}>
-              <Box sx={{width:"50%",paddingLeft:"10px"}}>
-                <Typography sx={{color:"#897f70"}}>Material</Typography>
-                <Typography sx={{color:"#2a2622"}}>18K Yellow Gold</Typography>
-              </Box>
-              <Box sx={{width:"50%"}}>
-                <Typography sx={{color:"#897f70"}}>Weight</Typography>
-                <Typography>5.2g</Typography>
-              </Box>
-
+          <Box
+            sx={{
+              height: "12vh",
+              backgroundColor: "#f6f5f2",
+              borderRadius: "25px",
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            <Box sx={{ width: "50%", paddingLeft: "10px" }}>
+              <Typography sx={{ color: "#897f70" }}>Material</Typography>
+              <Typography sx={{ color: "#2a2622" }}>
+                {selectedProduct?.material}
+              </Typography>
+            </Box>
+            <Box sx={{ width: "50%" }}>
+              <Typography sx={{ color: "#897f70" }}>Weight</Typography>
+              <Typography>{selectedProduct?.weight}</Typography>
+            </Box>
           </Box>
 
-          <Box sx={{margin:"5% 0%",display:"flex",alignItems:"center"}}>
-              <Button sx={{border:"1px solid #e7e2da",color:"black",display:"flex",justifyContent:"space-between",width:"23%",borderRadius:"10px",marginRight:"2%"}}>
-                 <Typography sx={{fontSize:"20px"}}>-</Typography>
-                 <Typography sx={{fontSize:"20px"}}>1</Typography>
-                 <Typography sx={{fontSize:"20px"}}>+</Typography>
-              </Button>
-              <Box sx={{color:"#00aa5c",display:"flex"}}>
-                <DoneOutlinedIcon/>
-                 <Typography >In Stock</Typography>
-              </Box>
+          <Box sx={{ margin: "5% 0%", display: "flex", alignItems: "center" }}>
+            <Button
+              sx={{
+                border: "1px solid #e7e2da",
+                color: "black",
+                display: "flex",
+                justifyContent: "space-between",
+                width: "23%",
+                borderRadius: "10px",
+                marginRight: "2%",
+                padding:" 5px 20px"
+              }}
+            >
+              <Typography sx={{ fontSize: "20px" }}>-</Typography>
+              <Typography sx={{ fontSize: "20px" }}>1</Typography>
+              <Typography sx={{ fontSize: "20px" }}>+</Typography>
+            </Button>
+            <Box sx={{ color: "#00aa5c", display: "flex" }}>
+              <DoneOutlinedIcon />
+              <Typography>In Stock</Typography>
+            </Box>
           </Box>
 
           <Box>
-              <Button sx={{color:"#2a2622",textTransform:"capitalize",border:"1px solid #b68a1b",backgroundColor:"#d8aa33",width:"82%",height:"9vh",borderRadius:"10px",marginRight:"3%"}}>
-                <LocalMallOutlinedIcon style={{width:"18px",height:"18px",marginRight:"3%"}}/>
-                <Typography>Add to Cart</Typography>
-              </Button>
-              <Button sx={{border:"1px solid #e1e1df",color:"#2a2622",width:"14%",height:"9vh",borderRadius:"10px"}}>
-                   <FavoriteBorderOutlinedIcon style={{width:"18px",height:"18px"}}/>
-              </Button>
+            <Button
+              sx={{
+                color: "#2a2622",
+                textTransform: "capitalize",
+                backgroundColor: "#d8aa33",
+                width: "82%",
+                height: "9vh",
+                borderRadius: "10px",
+                marginRight: "3%",
+              }}
+            >
+              <LocalMallOutlinedIcon
+                style={{ width: "18px", height: "18px", marginRight: "3%" }}
+              />
+              <Typography >Add to Cart</Typography>
+            </Button>
+            <Button
+              sx={{
+                border: "1px solid #e1e1df",
+                color: "#2a2622",
+                width: "14%",
+                height: "9vh",
+                borderRadius: "10px",
+              }}
+            >
+              <FavoriteBorderOutlinedIcon
+                style={{ width: "18px", height: "18px" }}
+              />
+            </Button>
           </Box>
         </Box>
 
-        <Box sx={{minHeight:"25vh",border:"2px solid", width: "95%",margin:"0px auto"}}>
+        <Box
+          sx={{
+            minHeight: "25vh",
+            width: "95%",
+            margin: "0px auto",
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          {freeShipping?.map((itm) => (
+            <Box sx={{ width: "33%", textAlign: "center" }}>
+              <Box style={{ color: "#d9a520" }}>{itm.icon}</Box>
 
-            <Box sx={{width:"33%"}}>
-                <Truck style={{color:"#d9a520"}} />
-                <Typography>Free Shipping</Typography>
-                <Typography sx={{color:"Orders over $500"}}>Orders over $500</Typography>
+              <Typography sx={{ color: "#2a2622", fontSize: "15px" }}>
+                {itm.title}
+              </Typography>
+              <Typography sx={{ color: "#8a8075", fontSize: "13px" }}>
+                {itm.description}
+              </Typography>
             </Box>
-
-            <Box>
-                
-            </Box>
-
+          ))}
         </Box>
       </Box>
     </>

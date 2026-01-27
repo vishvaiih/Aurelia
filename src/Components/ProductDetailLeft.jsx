@@ -20,13 +20,13 @@ function ProductDetailLeft({ selectedProduct }) {
 
   return (
     <>
-      <Box sx={{ minHeight: "90vh", width: "50%" ,border: "2px solid"}}>
+      <Box sx={{ minHeight: "90vh", width: "50%" }}>
         <img
           src={selectedProduct?.image}
           style={{ width: "95%", height: "90vh", borderRadius: "18px" }}
         ></img>
 
-        <Box sx={{ border: "2px solid",  width: "95%",height: "30vh", marginTop: "15px" ,display:"flex",justifyContent:"space-between"}}>
+        <Box sx={{ width: "95%",height: "30vh", marginTop: "15px" ,display:"flex",justifyContent:"space-between"}}>
          
 
           {image?.map((itm) =>

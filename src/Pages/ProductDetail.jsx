@@ -7,6 +7,7 @@ import ProductDetailLeft from "../Components/ProductDetailLeft";
 import { useParams } from "react-router-dom";
 import { products } from "../Database/Database";
 import ProductDetailRight from "../Components/ProductDetailRight";
+import Details from "../Components/Details";
 
 function ProductDetail() {
 
@@ -32,7 +33,7 @@ function ProductDetail() {
             width: "90%",
             minHeight: "100vh",
             border: "2px solid black",
-            margin: "0px auto",
+            margin: "0% auto",
           }}
         >
           <Box
@@ -53,7 +54,11 @@ function ProductDetail() {
                 <ProductDetailLeft selectedProduct={selectedProduct} />
 
                 <ProductDetailRight selectedProduct={selectedProduct}/>
+                
+          </Box>
 
+          <Box>
+               <Details/>
 
           </Box>
 
