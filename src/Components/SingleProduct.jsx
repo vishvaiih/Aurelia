@@ -83,6 +83,7 @@ function SingleProduct({itm,addToCart,addToWishList,wishlist}) {
                 margin: "13px 0px 10px",
                 color: "#9e968c",
                 alignItems: "center",
+                cursor:"pointer"
               }}
             >
               <Typography sx={{ fontSize: "12px", textTransform: "uppercase" }}>
@@ -95,9 +96,10 @@ function SingleProduct({itm,addToCart,addToWishList,wishlist}) {
                   backgroundColor: "#9e968c",
                   borderRadius: "100%",
                   margin: "0px 5px",
+                   cursor:"pointer"
                 }}
               ></Box>
-              <Typography sx={{ fontSize: "12px", textTransform: "uppercase" }}>
+              <Typography sx={{ fontSize: "12px", textTransform: "uppercase", cursor:"pointer" }}>
                 {itm.type}
               </Typography>
             </Box>
@@ -106,6 +108,7 @@ function SingleProduct({itm,addToCart,addToWishList,wishlist}) {
                 color: "#423e3a",
                 fontFamily: "serif",
                 fontSize: "17px",
+                 cursor:"pointer"
               }}
             >
               {itm.name}
@@ -117,6 +120,7 @@ function SingleProduct({itm,addToCart,addToWishList,wishlist}) {
                 marginTop: "10px",
                 fontWeight: "600",
                 fontSize: "18px",
+                 cursor:"pointer"
               }}
             >
               ${itm.price}

@@ -24,9 +24,9 @@ function ShopAll() {
         <Filters />
 
         <Box sx={{ display: "flex" }}>
-          <Categories />
+          {/* <Categories /> */}
 
-          <ProductList />
+          {/* <ProductList /> */}
         </Box>
       </Box>
 
