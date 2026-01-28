@@ -30,12 +30,11 @@ function ProductDetail() {
   return (
     <>
       <Header />
-      <Box sx={{ backgroundColor: "#fbfaf8" }}>
+      <Box sx={{ backgroundColor: "#fbfaf8" ,padding:"1px"}}>
         <Box
           sx={{
             width: "90%",
             minHeight: "100vh",
-            border: "2px solid black",
             margin: "0% auto",
           }}
         >

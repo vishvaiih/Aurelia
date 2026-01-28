@@ -51,7 +51,7 @@ function ProductDetailRight({ selectedProduct }) {
           }}
         >
           <Box sx={{ display: "flex", color: "#7e7367", alignItems: "center" }}>
-            <Typography sx={{ textTransform: "capitalize", fontSize: "15px" }}>
+            <Typography sx={{ textTransform:"uppercase", fontSize: "15px" }}>
               {selectedProduct?.category}
             </Typography>
             <Box
@@ -63,7 +63,7 @@ function ProductDetailRight({ selectedProduct }) {
                 margin: "0% 1%",
               }}
             ></Box>
-            <Typography sx={{ textTransform: "capitalize", fontSize: "15px" }}>
+            <Typography sx={{ textTransform: "uppercase", fontSize: "15px" }}>
               {selectedProduct?.type}
             </Typography>
           </Box>
