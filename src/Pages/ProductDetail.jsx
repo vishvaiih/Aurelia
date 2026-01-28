@@ -8,6 +8,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { products } from "../Database/Database";
 import ProductDetailRight from "../Components/ProductDetailRight";
 import Details from "../Components/Details";
+import SameProduct from "../Components/SameProduct";
 
 function ProductDetail() {
 
@@ -62,9 +63,11 @@ function ProductDetail() {
           </Box>
 
           <Box>
-               <Details/>
+               <Details selectedProduct={selectedProduct}/>
 
           </Box>
+
+               <SameProduct selectedProduct={selectedProduct}/>
 
         </Box>
       </Box>

@@ -9,16 +9,6 @@ import { UserContext } from "../UseContext/UseContext";
 import SingleProduct from "./SingleProduct";
 
 function ProductList() {
-  
-
-  const { setCart, setWishList,addToCart,addToWishList,wishlist } = useContext(UserContext);
-
- 
-
- 
-
- 
-
   return (
     <Box sx={{ width: "100%" }}>
       <Grid
@@ -28,10 +18,7 @@ function ProductList() {
         columnSpacing={{ xs: 1, sm: 2, md: 3 }}
       >
         {products.map((itm) => (
-          
-               <SingleProduct key={itm.id} itm={itm} />
-
-
+          <SingleProduct key={itm.id} itm={itm} />
         ))}
       </Grid>
     </Box>
