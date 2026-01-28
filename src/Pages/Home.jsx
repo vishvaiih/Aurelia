@@ -5,6 +5,9 @@ import HandCrafted from "../Components/HandCrafted";
 import ShopByCategory from "../Components/ShopByCategory";
 import FeaturedPieces from "../Components/FeaturedPieces";
 import OurStory from "../Components/OurStory";
+import BestSellers from "../Components/BestSellers";
+import PerfectPieace from "../Components/PerfectPieace";
+import Footer from "../Components/Footer";
 
 
 function Home() {
@@ -16,6 +19,9 @@ function Home() {
       <ShopByCategory/>
       <FeaturedPieces/>
       <OurStory/>
+      <BestSellers/>
+      <PerfectPieace/>
+      <Footer/>
     </>
   );
 }
