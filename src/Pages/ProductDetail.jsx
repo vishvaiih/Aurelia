@@ -10,27 +10,26 @@ import ProductDetailRight from "../Components/ProductDetailRight";
 import Details from "../Components/Details";
 import SameProduct from "../Components/SameProduct";
 
+
 function ProductDetail() {
+  const params = useParams();
+  const productId = params.id;
 
-    const params = useParams();
-    const productId = params.id;
+  const navigation = useNavigate();
 
-    const navigation = useNavigate();
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
-    const [selectedProduct, setSelectedProduct] = useState(null);
-    
-      useEffect(() => {
-        const findProduct = products?.find((itm) => itm.id == productId);
-        console.log("findProduct", findProduct);
-    
-        setSelectedProduct(findProduct);
-      }, [productId]);
+  useEffect(() => {
+    const findProduct = products?.find((itm) => itm.id == productId);
+    console.log("findProduct", findProduct);
 
+    setSelectedProduct(findProduct);
+  }, [productId]);
 
   return (
     <>
       <Header />
-      <Box sx={{ backgroundColor: "#fbfaf8" ,padding:"1px"}}>
+      <Box sx={{ backgroundColor: "#fbfaf8", padding: "1px" }}>
         <Box
           sx={{
             width: "90%",
@@ -39,13 +38,13 @@ function ProductDetail() {
           }}
         >
           <Box
-            onClick = {() => navigation("/shop")}
+            onClick={() => navigation("/shop")}
             sx={{
               display: "flex",
               color: "#7e7367",
               alignItems: "center",
               margin: "25px 0px",
-              cursor:"pointer"
+              cursor: "pointer",
             }}
           >
             <ArrowBackOutlinedIcon
@@ -54,19 +53,15 @@ function ProductDetail() {
             <Typography>Back To Shop</Typography>
           </Box>
 
-          <Box sx={{minHeight:"90vh",display:"flex"}}>
-                <ProductDetailLeft selectedProduct={selectedProduct} />
+          <Box sx={{ minHeight: "90vh", display: "flex" }}>
+            <ProductDetailLeft selectedProduct={selectedProduct} />
 
-                <ProductDetailRight selectedProduct={selectedProduct}/>
-                
+            <ProductDetailRight selectedProduct={selectedProduct} />
           </Box>
 
-          <Box>
-               <Details selectedProduct={selectedProduct}/>
+          <Details selectedProduct={selectedProduct} />
 
-          </Box>
-
-               <SameProduct selectedProduct={selectedProduct}/>
+          <SameProduct selectedProduct={selectedProduct} />
 
         </Box>
       </Box>

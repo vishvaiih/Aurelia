@@ -7,12 +7,12 @@ import { categories } from "../Database/Database";
 function ShopByCategory() {
   return (
     <>
-      <Box sx={{ minHeight: "102vh", backgroundColor: "#fbfaf8" }}>
+      <Box sx={{ minHeight: "90vh", backgroundColor: "#fbfaf8" }}>
         <Box
           sx={{
             width: "90%",
             margin: "0px auto",
-            minHeight: "102vh",
+            minHeight: "90vh",
           }}
         >
           <Typography
