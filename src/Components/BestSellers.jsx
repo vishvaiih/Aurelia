@@ -43,7 +43,7 @@ function BestSellers() {
           columnSpacing={{ xs: 1, sm: 2, md: 3 }}
         >  
          {
-            products?.splice(4,8).map((itm) => 
+            products?.slice(4,8).map((itm) => 
                 <FeaturePieaceItem itm={itm}/>
             )
          }

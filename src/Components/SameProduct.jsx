@@ -5,7 +5,7 @@ import Grid from "@mui/material/Grid";
 import { products } from "../Database/Database";
 
 function SameProduct({ selectedProduct }) {
-  const [categoryProduct, setCategoryProduct] = useState(null);
+  const [categoryProduct, setCategoryProduct] = useState([]);
 
   
 
@@ -14,7 +14,7 @@ function SameProduct({ selectedProduct }) {
       (itm) => itm.category == selectedProduct?.category && itm.id !== selectedProduct?.id
     );
     setCategoryProduct(categoryViseProducts);
-  }, [selectedProduct?.category]);
+  }, [selectedProduct]);
 
   console.log("categoryProduct",categoryProduct)
 
@@ -33,7 +33,7 @@ function SameProduct({ selectedProduct }) {
         >  
 
         {categoryProduct?.map((itm) => 
-                <OneProduct itm={itm} />
+                <OneProduct key={itm.id} itm={itm} />
         )}
          
         </Grid>

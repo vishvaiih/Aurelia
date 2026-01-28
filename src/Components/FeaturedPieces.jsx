@@ -31,7 +31,7 @@ function FeaturedPieces() {
           columnSpacing={{ xs: 1, sm: 2, md: 3 }}
         >  
          {
-            products?.splice(0,4).map((itm) => 
+            products?.slice(0,4).map((itm) => 
                 <FeaturePieaceItem itm={itm}/>
             )
          }

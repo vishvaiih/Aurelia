@@ -110,7 +110,7 @@ export const UserProvider = ({ children }) => {
 
       localStorage.setItem("wishlist", JSON.stringify(getWishList));
 
-      toast.success("Remove product in wishList successfully")
+      toast.success("Remove product from wishList successfully")
 
       return;
     }

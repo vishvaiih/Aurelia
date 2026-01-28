@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext,useState } from "react";
 import { Box, Button, Typography } from "@mui/material";
 import Rating from "@mui/material/Rating";
 import DoneOutlinedIcon from "@mui/icons-material/DoneOutlined";
@@ -12,6 +12,8 @@ import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 
 
 function ProductDetailRight({ selectedProduct }) {
+  const [qty, setQty] = useState(1);
+
   const freeShipping = [
     {
       icon: <Truck />,
@@ -177,17 +179,17 @@ function ProductDetailRight({ selectedProduct }) {
               }}
             >
               <Typography
-                onClick={() => decrement(selectedProduct?.id)}
+             onClick={() => qty > 1 && setQty(qty - 1)}
                 sx={{ fontSize: "20px" }}
               >
                 -
               </Typography>
               <Typography sx={{ fontSize: "20px" }}>
                
-                {productQty(selectedProduct?.id)}
+               {qty}
               </Typography>
               <Typography
-                onClick={() => increment(selectedProduct?.id)}
+               onClick={() => setQty((prev) => prev + 1)}
                 sx={{ fontSize: "20px" }}
               >
                 +
@@ -212,7 +214,7 @@ function ProductDetailRight({ selectedProduct }) {
 
           <Box>
             <Button
-              onClick={() => addToCart(selectedProduct)}
+              onClick={() => addToCart({ ...selectedProduct, qty })}
               sx={{
                 color: "#2a2622",
                 textTransform: "capitalize",

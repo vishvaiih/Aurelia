@@ -18,6 +18,25 @@ function SingleProduct({ itm }) {
   return (
     <Box sx={{ minHeight: "50vh", width: "23%", marginTop: "10px" }}>
       <Box sx={{ position: "relative" }}>
+         {itm?.bestseller === true && (
+                    <>
+                      <Button
+                        sx={{
+                          position: "absolute",
+                          top: "10px",
+                          left: "10px",
+                          color: "#25221e",
+                          backgroundColor: "#d7b04b",
+                          textTransform: "capitalize",
+                          borderRadius: "20px",
+                          padding: "2px 10px",
+                          fontSize: "13px",
+                        }}
+                      >
+                        BestSeller
+                      </Button>
+                    </>
+                  )}
         <img
           src={itm.image}
           style={{

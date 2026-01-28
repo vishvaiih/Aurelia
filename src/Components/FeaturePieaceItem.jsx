@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext } from "react";
 import { Box, Typography, Button } from "@mui/material";
 import { ShoppingBag } from "lucide-react";
 
@@ -8,16 +8,15 @@ import Favorite from "@mui/icons-material/Favorite";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../UseContext/UseContext";
 
-function FeaturePieaceItem({itm}) {
+function FeaturePieaceItem({ itm }) {
+  const label = { slotProps: { input: { "aria-label": "Checkbox demo" } } };
 
-    const label = { slotProps: { input: { "aria-label": "Checkbox demo" } } };
+  const navigation = useNavigate();
 
-    const navigation = useNavigate();
-
-     const { addToCart, addToWishList, wishlist } = useContext(UserContext);
+  const { addToCart, addToWishList, wishlist } = useContext(UserContext);
   return (
     <>
-          <Box sx={{ minHeight: "50vh", width: "23%", marginTop: "10px" }}>
+      <Box sx={{ minHeight: "50vh", width: "23%", marginTop: "10px" }}>
         <Box sx={{ position: "relative" }}>
           {itm?.bestseller === true && (
             <>
@@ -41,6 +40,7 @@ function FeaturePieaceItem({itm}) {
 
           <img
             src={itm?.image}
+            onClick={() => navigation(`/shop/${itm.id}`)}
             style={{
               height: "42vh",
               borderRadius: "15px",
@@ -49,12 +49,11 @@ function FeaturePieaceItem({itm}) {
             }}
           />
 
-          {/* Button on Image */}
           <Button
             onClick={() => addToCart(itm)}
             variant="contained"
             sx={{
-              width: "70%",
+              width: "68%",
               height: "5vh",
               position: "absolute",
               bottom: "10px",
@@ -99,7 +98,7 @@ function FeaturePieaceItem({itm}) {
           </Button>
         </Box>
 
-        <Box  onClick={() => navigation(`/shop/${itm.id}`)}>
+        <Box onClick={() => navigation(`/shop/${itm.id}`)}>
           <Box
             sx={{
               display: "flex",
@@ -110,7 +109,7 @@ function FeaturePieaceItem({itm}) {
             }}
           >
             <Typography sx={{ fontSize: "12px", textTransform: "uppercase" }}>
-             {itm?.category}
+              {itm?.category}
             </Typography>
             <Box
               sx={{
@@ -129,7 +128,7 @@ function FeaturePieaceItem({itm}) {
                 cursor: "pointer",
               }}
             >
-             {itm?.type}
+              {itm?.type}
             </Typography>
           </Box>
           <Typography
@@ -140,7 +139,7 @@ function FeaturePieaceItem({itm}) {
               cursor: "pointer",
             }}
           >
-          {itm?.name}
+            {itm?.name}
           </Typography>
 
           <Box
@@ -155,7 +154,7 @@ function FeaturePieaceItem({itm}) {
                 cursor: "pointer",
               }}
             >
-             ${itm?.price}
+              ${itm?.price}
             </Typography>
             {itm?.originalPrice && (
               <Typography
@@ -167,15 +166,14 @@ function FeaturePieaceItem({itm}) {
                   cursor: "pointer",
                 }}
               >
-               {itm?.originalPrice}
+                {itm?.originalPrice}
               </Typography>
             )}
           </Box>
         </Box>
       </Box>
-    
     </>
-  )
+  );
 }
 
-export default FeaturePieaceItem
+export default FeaturePieaceItem;

@@ -3,12 +3,13 @@ import Box from "@mui/material/Box";
 import { Button, Typography } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import LocalMallOutlinedIcon from "@mui/icons-material/LocalMallOutlined";
 import { User } from "lucide-react";
 
 function Header() {
   const navigation = useNavigate();
+  const location = useLocation();
 
   let getItem = JSON.parse(localStorage.getItem("userDetail"));
   return (
@@ -30,14 +31,16 @@ function Header() {
           </Typography>
           <Box className="menu">
             <Typography
-              className="perticularmenu Home"
+              className="perticularmenu"
               onClick={() => navigation("/")}
+              sx={{ color: location.pathname === "/" ? "#d9a520" : "#2a2622" }}
             >
               Home
             </Typography>
             <Typography
               className="perticularmenu"
               onClick={() => navigation("/shop")}
+              sx={{ color: location.pathname === "/shop" ? "#d9a520" : "#2a2622" }}
             >
               Shop All
             </Typography>
