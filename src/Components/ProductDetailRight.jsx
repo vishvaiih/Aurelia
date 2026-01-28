@@ -10,6 +10,7 @@ import { UserContext } from "../UseContext/UseContext";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 
+
 function ProductDetailRight({ selectedProduct }) {
   const freeShipping = [
     {

@@ -4,6 +4,7 @@ import Banner from "../Components/Banner";
 import HandCrafted from "../Components/HandCrafted";
 import ShopByCategory from "../Components/ShopByCategory";
 import FeaturedPieces from "../Components/FeaturedPieces";
+import OurStory from "../Components/OurStory";
 
 
 function Home() {
@@ -14,6 +15,7 @@ function Home() {
       <HandCrafted/>
       <ShopByCategory/>
       <FeaturedPieces/>
+      <OurStory/>
     </>
   );
 }

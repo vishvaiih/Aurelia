@@ -1,12 +1,15 @@
 import { Box, Typography } from '@mui/material'
 import React from 'react'
 import ArrowForwardOutlinedIcon from '@mui/icons-material/ArrowForwardOutlined';
+import FeaturePieaceItem from './FeaturePieaceItem';
+import Grid from "@mui/material/Grid";
+import { products } from '../Database/Database';
 
 function FeaturedPieces() {
   return (
    <>
-   <Box sx={{minHeight:"90vh",backgroundColor:"#f8f7f4"}}>
-          <Box sx={{width:"90%",margin:"0px auto",border:"2px solid",minHeight:"90vh"}}>
+   <Box sx={{minHeight:"90vh",backgroundColor:"#f8f7f4",padding:"1px"}}>
+          <Box sx={{width:"90%",margin:"0px auto",minHeight:"90vh"}}>
              
              <Box sx={{margin:"5% 0% 3%"}}>
                 <Typography sx={{fontFamily:"serif",fontSize:"45px"}}>Featured Pieces</Typography>
@@ -21,7 +24,23 @@ function FeaturedPieces() {
                 </Box>        
              </Box>
 
-             
+             <Grid
+          sx={{ display: "flex", margin: "2% 0%" }}
+          container
+          rowSpacing={2}
+          columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+        >  
+         {
+            products?.splice(0,4).map((itm) => 
+                <FeaturePieaceItem itm={itm}/>
+            )
+         }
+              
+       
+         
+        </Grid>
+
+            
 
 
 

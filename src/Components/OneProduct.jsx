@@ -7,7 +7,6 @@ import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import Favorite from "@mui/icons-material/Favorite";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../UseContext/UseContext";
-import { products } from "../Database/Database";
 
 function OneProduct({ itm }) {
   const label = { slotProps: { input: { "aria-label": "Checkbox demo" } } };
