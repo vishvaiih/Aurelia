@@ -20,7 +20,7 @@ function OneProduct({ itm }) {
     <>
       <Box sx={{ minHeight: "50vh", width: "24%", marginTop: "10px" }}>
         <Box sx={{ position: "relative" }}>
-          {products?.bestseller === true && (
+          {itm?.bestseller === true && (
             <>
               <Button
                 sx={{

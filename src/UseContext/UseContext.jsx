@@ -1,5 +1,6 @@
 import React, { createContext, useState,useEffect } from "react";
 import { products } from "../Database/Database";
+import { toast } from "react-toastify";
 
 export const UserContext = createContext();
 
@@ -57,6 +58,11 @@ export const UserProvider = ({ children }) => {
 
     let product = Cart?.items?.find((itm) => itm?.productId == productId);
 
+    if(product){
+      toast.error("Already added product in cart")
+      return;
+    }
+
     if (product) {
       product.qty += 1;
     } else {
@@ -69,6 +75,8 @@ export const UserProvider = ({ children }) => {
     setCart(getCart);
 
     localStorage.setItem("cart", JSON.stringify(getCart));
+
+    toast.success("Add product in cart successfully")
   };
 
   const addToWishList = (itm) => {
@@ -102,6 +110,8 @@ export const UserProvider = ({ children }) => {
 
       localStorage.setItem("wishlist", JSON.stringify(getWishList));
 
+      toast.success("Remove product in wishList successfully")
+
       return;
     }
 
@@ -110,6 +120,8 @@ export const UserProvider = ({ children }) => {
     setWishList(getWishList);
 
     localStorage.setItem("wishlist", JSON.stringify(getWishList));
+
+    toast.success("Add product in wishlist successfully")
   };
 
   const wishlist = (productId) => {
@@ -162,7 +174,7 @@ export const UserProvider = ({ children }) => {
   const productQty = (productId) => {
     const find = findUser?.items?.find((itm) => itm?.productId === productId);
 
-    return find?.qty;
+    return find?.qty || 0;
   };
 
   return (
