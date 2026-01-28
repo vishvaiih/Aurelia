@@ -1,18 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Box, Button, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import Checkbox from "@mui/material/Checkbox";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import Favorite from "@mui/icons-material/Favorite";
+import { UserContext } from "../UseContext/UseContext";
 
 function RecentOrderLeftItem({
   i,
-  incrementAction,
-  decrementAction,
+  
   priceOFCartProduct = () => {},
   typeCart,
-  productQty = () => {},
   deleteAction,
   removeProductFromWhishlist,
 }) {
@@ -25,6 +24,9 @@ function RecentOrderLeftItem({
       backgroundColor: "#1A2027",
     }),
   }));
+
+   const {  increment, decrement,  productQty } =
+      useContext(UserContext);
 
   const label = { slotProps: { input: { "aria-label": "Checkbox demo" } } };
 
@@ -76,7 +78,7 @@ function RecentOrderLeftItem({
         {typeCart ? (
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <Button
-              onClick={() => decrementAction(i.id)}
+              onClick={() => decrement(i.id)}
               sx={{
                 border: "1px solid #acbac4",
                 color: "black",
@@ -89,7 +91,7 @@ function RecentOrderLeftItem({
               {productQty(i.id)}
             </Typography>
             <Button
-              onClick={() => incrementAction(i.id)}
+              onClick={() => increment(i.id)}
               sx={{ border: "1px solid #acbac4", color: "black" }}
             >
               +

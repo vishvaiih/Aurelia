@@ -4,7 +4,7 @@ import { Box, Typography } from "@mui/material";
 import Footer from "../Components/Footer";
 import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
 import ProductDetailLeft from "../Components/ProductDetailLeft";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { products } from "../Database/Database";
 import ProductDetailRight from "../Components/ProductDetailRight";
 import Details from "../Components/Details";
@@ -13,6 +13,8 @@ function ProductDetail() {
 
     const params = useParams();
     const productId = params.id;
+
+    const navigation = useNavigate();
 
     const [selectedProduct, setSelectedProduct] = useState(null);
     
@@ -37,11 +39,13 @@ function ProductDetail() {
           }}
         >
           <Box
+            onClick = {() => navigation("/shop")}
             sx={{
               display: "flex",
               color: "#7e7367",
               alignItems: "center",
               margin: "25px 0px",
+              cursor:"pointer"
             }}
           >
             <ArrowBackOutlinedIcon

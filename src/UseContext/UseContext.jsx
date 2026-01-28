@@ -1,4 +1,5 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState,useEffect } from "react";
+import { products } from "../Database/Database";
 
 export const UserContext = createContext();
 
@@ -18,9 +19,27 @@ export const UserProvider = ({ children }) => {
     return getWishList;
   });
 
-  const addToCart = (itm) => {
+   const [cartProduct, setCartProduct] = useState("");
+    const [findUser, setFindUser] = useState("");
+
     let getUserDetail = JSON.parse(localStorage.getItem("userDetail"));
     let userId = getUserDetail;
+
+    useEffect(() => {
+        let findUser = cart?.find((itm) => itm.userId == getUserDetail);
+    
+        let allProductId = findUser?.items?.map((i) => i.productId);
+    
+        const cartProduct = products?.filter((i) => allProductId?.includes(i.id));
+    
+        setCartProduct(cartProduct);
+        setFindUser(findUser);
+      }, [cart, getUserDetail]);
+
+
+  const addToCart = (itm) => {
+   
+ 
 
     let productId = itm?.id;
 
@@ -53,10 +72,8 @@ export const UserProvider = ({ children }) => {
   };
 
   const addToWishList = (itm) => {
-    let getUserDetail = JSON.parse(localStorage.getItem("userDetail"));
-    let userId = getUserDetail;
+   
 
-    
 
     let getWishList = JSON.parse(localStorage.getItem("wishlist")) || [];
 
@@ -96,14 +113,56 @@ export const UserProvider = ({ children }) => {
   };
 
   const wishlist = (productId) => {
-    let getUserDetail = JSON.parse(localStorage.getItem("userDetail"));
-    let userId = getUserDetail;
-
+    
     let getWishList = JSON.parse(localStorage.getItem("wishlist")) || [];
 
     let wishList = getWishList?.find((itm) => itm?.userId == userId);
 
     return wishList?.items?.includes(productId);
+  };
+
+  const increment = (productid) => {
+    let changeQty = cart?.map((itm) =>
+      Number(itm.userId) === Number(getUserDetail)
+        ? {
+            ...itm,
+            items: itm?.items?.map((i) =>
+              Number(i.productId) === Number(productid)
+                ? { ...i, qty: Number(i.qty) + 1 }
+                : i
+            ),
+          }
+        : itm
+    );
+
+    setCart(changeQty);
+
+    localStorage.setItem("cart", JSON.stringify(changeQty));
+  };
+
+  const decrement = (productid) => {
+    let changeQty = cart?.map((itm) =>
+      Number(itm.userId) === Number(getUserDetail)
+        ? {
+            ...itm,
+            items: itm?.items?.map((i) =>
+              Number(i.productId) === Number(productid)
+                ? { ...i, qty: i.qty > 1 ? Number(i.qty) - 1 : 1 }
+                : i
+            ),
+          }
+        : itm
+    );
+
+    setCart(changeQty);
+
+    localStorage.setItem("cart", JSON.stringify(changeQty));
+  };
+
+  const productQty = (productId) => {
+    const find = findUser?.items?.find((itm) => itm?.productId === productId);
+
+    return find?.qty;
   };
 
   return (
@@ -118,6 +177,10 @@ export const UserProvider = ({ children }) => {
         addToCart,
         addToWishList,
         wishlist,
+        increment,
+        decrement,
+        productQty,
+        cartProduct,findUser
       }}
     >
       {children}
