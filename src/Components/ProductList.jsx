@@ -4,7 +4,7 @@ import { Box } from "@mui/material";
 import Grid from "@mui/material/Grid";
 
 import { products } from "../Database/Database";
-import { UserContext } from "../UseContext/UseContext";
+
 
 import SingleProduct from "./SingleProduct";
 
