@@ -10,6 +10,7 @@ import Categories from "../Components/Categories";
 function ShopAll() {
 
   
+
   return (
     <>
       <Header />

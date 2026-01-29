@@ -12,7 +12,7 @@ import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 
 
 function ProductDetailRight({ selectedProduct }) {
-  const [qty, setQty] = useState(1);
+ 
 
   const freeShipping = [
     {
@@ -37,6 +37,8 @@ function ProductDetailRight({ selectedProduct }) {
     addToWishList,
     wishlist,
     cartProduct,
+    qty,
+    setQty
   } = useContext(UserContext);
 
   console.log("cartProduct", cartProduct);
@@ -186,7 +188,7 @@ function ProductDetailRight({ selectedProduct }) {
                {qty}
               </Typography>
               <Typography
-               onClick={() => setQty((prev) => prev + 1)}
+               onClick={() => setQty( qty + 1)}
                 sx={{ fontSize: "20px" }}
               >
                 +
@@ -211,7 +213,8 @@ function ProductDetailRight({ selectedProduct }) {
 
           <Box>
             <Button
-              onClick={() => addToCart({ ...selectedProduct, qty })}
+              onClick={() => {addToCart({...selectedProduct})
+                              setQty(1) }}
               sx={{
                 color: "#2a2622",
                 textTransform: "capitalize",
