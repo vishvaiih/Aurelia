@@ -3,13 +3,15 @@ import { Box, Typography } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import { categories, productTypes } from "../Database/Database";
 
-function Categories() {
+function Categories({selectedCategory,setSelectedCategory}) {
   const priceRange = [
     " Under $500",
     "$500 - $1,000",
     "$1,000 - $3,000",
     "Over $3,000",
   ];
+
+  
 
   const label = { slotProps: { input: { "aria-label": "Checkbox demo" } } };
   return (
@@ -19,7 +21,10 @@ function Categories() {
 
         {categories.map((itm) => (
           <Box  key = {itm.id}  sx={{ display: "flex", alignItems: "center" }}>
-            <Checkbox {...label} style={{ color: "#d9a520" }} />
+            <Checkbox
+          
+            {...label} 
+            style={{ color: "#d9a520" }} />
             <Typography
               sx={{
                 color: "#413d39",
@@ -38,7 +43,7 @@ function Categories() {
 
         {productTypes.map((itm) => (
           <Box  key = {itm.id} sx={{ display: "flex", alignItems: "center" }}>
-            <Checkbox {...label} style={{ color: "#d9a520" }} />
+            <Checkbox checked={itm} {...label} style={{ color: "#d9a520" }} />
             <Typography
               sx={{
                 color: "#413d39",

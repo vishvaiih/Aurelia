@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Footer from "../Components/Footer";
 import Header from "../Components/Header";
 import { Box } from "@mui/material";
@@ -9,7 +9,8 @@ import Categories from "../Components/Categories";
 
 function ShopAll() {
 
-  
+  const [selectedCategory,setSelectedCategory] = useState([]);
+
 
   return (
     <>
@@ -27,7 +28,7 @@ function ShopAll() {
         <Filters />
 
         <Box sx={{ display: "flex" }}>
-          <Categories />
+          <Categories  selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />
 
           <ProductList />
         </Box>

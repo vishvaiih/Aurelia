@@ -62,6 +62,7 @@ function RecentOrderLeftItem({
         sx={{
           display: "flex",
           justifyContent: "space-between",
+         
           width: "100%",
         }}
       >
@@ -73,9 +74,13 @@ function RecentOrderLeftItem({
           }}
         >
           {i.name}
+          
         </Typography>
+
+        <Box sx={{width:"50%",display:"flex",justifyContent:"flex-end", alignItems:"center",}}>
+
         {typeCart ? (
-          <Box sx={{ display: "flex", alignItems: "center" }}>
+          <Box sx={{ display: "flex", alignItems: "center" ,marginRight:"5%"}}>
             <Button
               onClick={() => decrement(i.id)}
               sx={{
@@ -103,6 +108,7 @@ function RecentOrderLeftItem({
             color: "#2a2936",
             fontWeight: "500",
             width: "10%",
+            marginRight:"2%"
           }}
         >
           {!typeCart ? `$${i.price}` : `$${priceOFCartProduct(i)}`}
@@ -117,6 +123,7 @@ function RecentOrderLeftItem({
               borderRadius: "10px",
               color: "white",
               textTransform: "capitalize",
+              marginRight:"2%"
             }}
           >
             Delete
@@ -129,12 +136,16 @@ function RecentOrderLeftItem({
             icon={<FavoriteBorder />}
             checkedIcon={<Favorite />}
             sx={{
+              marginRight:"2%",
               "&.Mui-checked": {
                 color: "red",
               },
             }}
           />
         )}
+
+        </Box>
+       
       </Box>
     </Item>
   );
