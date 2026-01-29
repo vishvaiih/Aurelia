@@ -8,6 +8,8 @@ import ProductList from "../Components/ProductList";
 import Categories from "../Components/Categories";
 
 function ShopAll() {
+
+  
   return (
     <>
       <Header />

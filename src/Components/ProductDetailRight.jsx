@@ -36,9 +36,6 @@ function ProductDetailRight({ selectedProduct }) {
     addToCart,
     addToWishList,
     wishlist,
-    increment,
-    decrement,
-    productQty,
     cartProduct,
   } = useContext(UserContext);
 

@@ -16,7 +16,7 @@ function FeaturedPieces() {
                 <Box sx={{display:"flex",justifyContent:"space-between"}}>
 
                       <Typography sx={{color:"#89887e"}}>Our most beloved creations, handpicked for their exceptional beauty</Typography>
-                      <Box sx={{color:"#d9a520",width:"30%",display:"flex",justifyContent:"flex-end",alignItems:"center"}}> 
+                      <Box sx={{color:"#d9a520",width:"30%",display:"flex",justifyContent:"flex-end",alignItems:"center",marginRight:"2%"}}> 
                         <Typography sx={{fontSize:"15px",marginRight:"13px"}} >View All</Typography>
                          <ArrowForwardOutlinedIcon style={{width:"15px",height:"15px"}}/>
                       </Box>

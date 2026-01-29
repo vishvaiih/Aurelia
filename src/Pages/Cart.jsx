@@ -11,8 +11,7 @@ import { useLocation } from "react-router-dom";
 import { Typography } from "@mui/material";
 
 function Cart() {
-  const { cart, setCart,  productQty, cartProduct } =
-    useContext(UserContext);
+  const { cart, setCart, productQty, cartProduct } = useContext(UserContext);
 
   const location = useLocation();
   const typeCart = location.pathname == "/cart";
@@ -66,10 +65,8 @@ function Cart() {
               {cartProduct?.map((i) => (
                 <RecentOrderLeftItem
                   i={i}
-                 
                   priceOFCartProduct={priceOFCartProduct}
                   typeCart={typeCart}
-                  
                   deleteAction={handleDelete}
                 />
               ))}

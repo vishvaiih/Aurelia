@@ -24,6 +24,7 @@ function BestSellers() {
                 display: "flex",
                 justifyContent: "flex-end",
                 alignItems: "center",
+                marginRight: "2%",
               }}
             >
               <Typography sx={{ fontSize: "15px", marginRight: "13px" }}>
@@ -41,15 +42,10 @@ function BestSellers() {
           container
           rowSpacing={2}
           columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-        >  
-         {
-            products?.slice(4,8).map((itm) => 
-                <FeaturePieaceItem itm={itm}/>
-            )
-         }
-              
-       
-         
+        >
+          {products?.slice(4, 8).map((itm) => (
+            <FeaturePieaceItem itm={itm} />
+          ))}
         </Grid>
       </Box>
     </Box>

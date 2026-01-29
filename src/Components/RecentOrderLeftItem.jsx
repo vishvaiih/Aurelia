@@ -9,7 +9,7 @@ import { UserContext } from "../UseContext/UseContext";
 
 function RecentOrderLeftItem({
   i,
-  
+
   priceOFCartProduct = () => {},
   typeCart,
   deleteAction,
@@ -25,8 +25,7 @@ function RecentOrderLeftItem({
     }),
   }));
 
-   const {  increment, decrement,  productQty } =
-      useContext(UserContext);
+  const { increment, decrement, productQty } = useContext(UserContext);
 
   const label = { slotProps: { input: { "aria-label": "Checkbox demo" } } };
 
