@@ -46,7 +46,9 @@ function OneProduct({ itm }) {
               borderRadius: "15px",
               width: "100%",
               objectFit: "cover",
+              cursor:"pointer"
             }}
+            onClick={() => navigation(`/shop/${itm.id}`)}
           />
 
           {/* Button on Image */}

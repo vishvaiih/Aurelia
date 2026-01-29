@@ -46,6 +46,7 @@ function FeaturePieaceItem({ itm }) {
               borderRadius: "15px",
               width: "100%",
               objectFit: "cover",
+              cursor:"pointer"
             }}
           />
 

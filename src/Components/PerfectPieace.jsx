@@ -2,8 +2,12 @@ import { Box, Button, Typography } from "@mui/material";
 import { Sparkle, Sparkles } from "lucide-react";
 import React from "react";
 import ArrowForwardOutlinedIcon from "@mui/icons-material/ArrowForwardOutlined";
+import { useNavigate } from "react-router-dom";
 
 function PerfectPieace() {
+
+  const navigation = useNavigate();
+
   return (
     <>
       <Box sx={{ minHeight: "70vh", backgroundColor: "#f8f7f4" }}>
@@ -32,13 +36,13 @@ function PerfectPieace() {
 
           <Box sx={{display:"flex"}}>
           <Button sx={{border:"1px solid #b68a1b",color:"#2a262a",backgroundColor:"#d8aa32",textTransform:"capitalize",borderRadius:"10px",padding:"8px 30px"}}>
-            <Typography sx={{marginRight:"15px"}}>Start Shopping</Typography>
+            <Typography sx={{marginRight:"15px"}} onClick={() => navigation("/shop")}>Start Shopping</Typography>
             <ArrowForwardOutlinedIcon
               style={{ width: "15px", height: "15px" }}
             />
           </Button>
           <Button sx={{marginLeft:"15px",border:"1px solid #d9a520",color:"#d9a520",textTransform:"capitalize",borderRadius:"10px",padding:"8px 20px"}}>
-            <Typography sx={{marginRight:"15px"}}>Create Account</Typography>
+            <Typography sx={{marginRight:"15px"}}  onClick={() => navigation("/signup")}>Create Account</Typography>
             
           </Button>
           

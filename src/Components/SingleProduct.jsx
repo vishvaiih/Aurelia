@@ -39,12 +39,15 @@ function SingleProduct({ itm }) {
                   )}
         <img
           src={itm.image}
+          onClick={() => navigation(`/shop/${itm.id}`)}
           style={{
             height: "33vh",
             borderRadius: "15px",
             width: "100%",
             objectFit: "cover",
+            cursor:"pointer"
           }}
+          
         />
 
         {/* Button on Image */}

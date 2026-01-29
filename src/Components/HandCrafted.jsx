@@ -41,6 +41,7 @@ function HandCrafted() {
       >
         {handCrafted?.map((itm) => (
           <Box
+          
             sx={{
               width: "25%",
 
