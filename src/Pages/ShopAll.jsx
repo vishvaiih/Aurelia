@@ -10,27 +10,31 @@ import { products } from "../Database/Database";
 
 function ShopAll() {
   const [selectedCategory, setSelectedCategory] = useState([]);
-  const [selectedType,setSelectedType] = useState([]);
+  const [selectedType, setSelectedType] = useState([]);
+  const[selectedRange,setSelectedRange] = useState([]);
 
-  const [filterData,setFilterData] =  useState([]);
+  const [filterData, setFilterData] = useState([]);
+  
 
   useEffect(() => {
-
-    if(selectedCategory.length == 0){
+    if (selectedCategory.length == 0 && selectedType.length == 0) {
       setFilterData(products);
       return;
     }
 
-    const filter = products?.filter((itm) =>
-      selectedCategory.some((category) => category.toLowerCase() === itm.category.toLowerCase())
+    const filter = products?.filter(
+      (itm) =>
+        selectedCategory.some(
+          (category) => category?.toLowerCase() === itm?.category?.toLowerCase()
+        ) || selectedType.some(
+          (type) =>  type?.toLowerCase() === itm?.type?.toLowerCase())
     );
     console.log("filter", filter);
 
-    setFilterData(filter)
+    setFilterData(filter);
+  }, [selectedCategory,selectedType]);
 
-  }, [selectedCategory]);
-
-  console.log("selectedCategory", selectedCategory);
+  console.log("selectedRange", selectedRange);
 
   return (
     <>
@@ -49,13 +53,15 @@ function ShopAll() {
 
         <Box sx={{ display: "flex" }}>
           <Categories
-            selectedCategory={selectedCategory}
+           
             setSelectedCategory={setSelectedCategory}
             setSelectedType={setSelectedType}
-            selectedType={selectedType}
+           
+           
+            setSelectedRange={setSelectedRange}
           />
 
-          <ProductList  products={filterData} />
+          <ProductList products={filterData} />
         </Box>
       </Box>
 

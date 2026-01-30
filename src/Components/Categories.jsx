@@ -5,9 +5,10 @@ import { categories, productTypes } from "../Database/Database";
 
 function Categories({
   setSelectedCategory,
-  selectedCategory,
+  
   setSelectedType,
-  selectedType,
+  
+ setSelectedRange
 }) {
   const priceRange = [
     " Under $500",
@@ -16,11 +17,20 @@ function Categories({
     "Over $3,000",
   ];
 
-  const handleChange = (name, type) => {
+  const handleChange = (name) => {
     console.log(name, "name");
     setSelectedCategory((prev) => [...prev, name]);
-    setSelectedType((prev) => [...prev, type]);
+    
   };
+
+  const HandleTypeChange = (type) => {
+    console.log("type",type)
+       setSelectedType((prev) => [...prev, type]);
+  }
+
+  const handlePriceChane = (Price) => {
+      setSelectedRange((prev) => [...prev,Price]);
+  }
 
   const label = { slotProps: { input: { "aria-label": "Checkbox demo" } } };
   return (
@@ -54,7 +64,7 @@ function Categories({
         {productTypes.map((itm) => (
           <Box key={itm.id} sx={{ display: "flex", alignItems: "center" }}>
             <Checkbox
-              onChange={() => handleChange(itm.type)}
+              onChange={() => HandleTypeChange(itm?.name)}
               {...label}
               style={{ color: "#d9a520" }}
             />
@@ -76,7 +86,9 @@ function Categories({
 
         {priceRange.map((itm) => (
           <Box key={itm.id} sx={{ display: "flex", alignItems: "center" }}>
-            <Checkbox {...label} style={{ color: "#d9a520" }} />
+            <Checkbox 
+             onChange={() => handlePriceChane(itm)}
+            {...label} style={{ color: "#d9a520" }} />
             <Typography
               sx={{
                 color: "#413d39",
