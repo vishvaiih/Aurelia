@@ -17,6 +17,8 @@ function Categories({
     "Over $3,000",
   ];
 
+  const [checked,setChecked] = useState(false);
+
   const handleChange = (name) => {
     console.log(name, "name");
     setSelectedCategory((prev) => [...prev, name]);
@@ -41,7 +43,8 @@ function Categories({
         {categories.map((itm) => (
           <Box key={itm.id} sx={{ display: "flex", alignItems: "center" }}>
             <Checkbox
-              onChange={() => handleChange(itm.name)}
+              onCLick={() => set}
+              checked = {}
               {...label}
               style={{ color: "#d9a520" }}
             />

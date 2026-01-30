@@ -23,13 +23,15 @@ function ShopAll() {
 
     const filter = products?.filter(
       (itm) =>
+      
         selectedCategory.some(
           (category) => category?.toLowerCase() === itm?.category?.toLowerCase()
         ) ||
         selectedType.some(
           (type) => type?.toLowerCase() === itm?.type?.toLowerCase()
         ) ||
-        selectedRange.some((price) => {
+        selectedRange.some((p) => {
+          const price = p.trim().toLowerCase();
           // if(price.length == 0){
           //   return itm;
           // }
