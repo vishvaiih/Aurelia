@@ -11,7 +11,7 @@ function Categories({
  setSelectedRange
 }) {
   const priceRange = [
-    " Under $500",
+    "Under $500",
     "$500 - $1,000",
     "$1,000 - $3,000",
     "Over $3,000",

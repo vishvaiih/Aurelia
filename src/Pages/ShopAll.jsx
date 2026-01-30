@@ -11,13 +11,12 @@ import { products } from "../Database/Database";
 function ShopAll() {
   const [selectedCategory, setSelectedCategory] = useState([]);
   const [selectedType, setSelectedType] = useState([]);
-  const[selectedRange,setSelectedRange] = useState([]);
+  const [selectedRange, setSelectedRange] = useState([]);
 
   const [filterData, setFilterData] = useState([]);
-  
 
   useEffect(() => {
-    if (selectedCategory.length == 0 && selectedType.length == 0) {
+    if (selectedCategory.length == 0 && selectedType.length == 0 && selectedRange.length == 0) {
       setFilterData(products);
       return;
     }
@@ -26,15 +25,42 @@ function ShopAll() {
       (itm) =>
         selectedCategory.some(
           (category) => category?.toLowerCase() === itm?.category?.toLowerCase()
-        ) || selectedType.some(
-          (type) =>  type?.toLowerCase() === itm?.type?.toLowerCase())
+        ) ||
+        selectedType.some(
+          (type) => type?.toLowerCase() === itm?.type?.toLowerCase()
+        ) ||
+        selectedRange.some((price) => {
+          // if(price.length == 0){
+          //   return itm;
+          // }
+          if (price === "Under $500") {
+            return itm.price <= 500;
+          }
+          if (price === "$500 - $1,000") {
+            return itm.price > 500 && itm.price < 1000;
+          }
+          if (price === "$1,000 - $3,000") {
+            return itm.price > 1000 && itm.price < 3000;
+          }
+          if (price === "Over $3,000") {
+            return itm.price > 3000;
+          }
+        })
     );
     console.log("filter", filter);
 
     setFilterData(filter);
-  }, [selectedCategory,selectedType]);
 
-  console.log("selectedRange", selectedRange);
+    localStorage.setItem("filterData",JSON.stringify(filter));
+  }, [selectedCategory, selectedType,selectedRange]);
+
+ useEffect(() => {
+      const getFilterData = JSON.parse(localStorage.getItem("filterData")) || [];
+      console.log(getFilterData,"getFilterData")
+
+      setFilterData(getFilterData);
+
+ },[]);
 
   return (
     <>
@@ -53,11 +79,8 @@ function ShopAll() {
 
         <Box sx={{ display: "flex" }}>
           <Categories
-           
             setSelectedCategory={setSelectedCategory}
             setSelectedType={setSelectedType}
-           
-           
             setSelectedRange={setSelectedRange}
           />
 
