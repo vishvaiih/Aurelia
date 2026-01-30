@@ -16,6 +16,7 @@ function ShopAll() {
   const [filterData, setFilterData] = useState([]);
 
   useEffect(() => {
+    let finalData = products;
     if (
       selectedCategory.length == 0 &&
       selectedType.length == 0 &&
@@ -47,7 +48,7 @@ function ShopAll() {
       selectedRange.some((p) => {
         const price = p.trim().toLowerCase();
 
-        if (price === "Under $500") {
+        if (price === "under $500") {
           return itm.price <= 500;
         }
         if (price === "$500 - $1,000") {
@@ -56,7 +57,7 @@ function ShopAll() {
         if (price === "$1,000 - $3,000") {
           return itm.price > 1000 && itm.price < 3000;
         }
-        if (price === "Over $3,000") {
+        if (price === "over $3,000") {
           return itm.price > 3000;
         }
       })
@@ -66,7 +67,7 @@ function ShopAll() {
       selectedRange.some((p) => {
         const price = p.trim().toLowerCase();
 
-        if (price === "Under $500") {
+        if (price === "under $500") {
           return itm.price <= 500;
         }
         if (price === "$500 - $1,000") {
@@ -75,7 +76,7 @@ function ShopAll() {
         if (price === "$1,000 - $3,000") {
           return itm.price > 1000 && itm.price < 3000;
         }
-        if (price === "Over $3,000") {
+        if (price === "over $3,000") {
           return itm.price > 3000;
         }
       })
@@ -85,7 +86,7 @@ function ShopAll() {
       selectedRange.some((p) => {
         const price = p.trim().toLowerCase();
 
-        if (price === "Under $500") {
+        if (price === "under $500") {
           return itm.price <= 500;
         }
         if (price === "$500 - $1,000") {
@@ -94,7 +95,7 @@ function ShopAll() {
         if (price === "$1,000 - $3,000") {
           return itm.price > 1000 && itm.price < 3000;
         }
-        if (price === "Over $3,000") {
+        if (price === "over $3,000") {
           return itm.price > 3000;
         }
       })
@@ -105,48 +106,40 @@ function ShopAll() {
       selectedType.length === 0 &&
       selectedRange.length === 0
     ) {
-      setFilterData(filterCategory);
-    }
-
-    if (
+      finalData = filterCategory;
+    } else if (
       selectedCategory.length === 0 &&
       selectedType.length > 0 &&
       selectedRange.length === 0
     ) {
-      setFilterData(filterType);
-    }
-
-    if (
+      finalData = filterType;
+    } else if (
       selectedCategory.length > 0 &&
       selectedType.length > 0 &&
       selectedRange.length === 0
     ) {
-      setFilterData(filterTypeByFilterCategory);
-    }
-
-    if (
+      finalData = filterTypeByFilterCategory;
+    } else if (
       selectedCategory.length > 0 &&
       selectedType.length === 0 &&
       selectedRange.length > 0
     ) {
-      setFilterData(filterCategoryByprice);
-    }
-
-    if (
+      finalData = filterCategoryByprice;
+    } else if (
       selectedCategory.length > 0 &&
       selectedType.length > 0 &&
       selectedRange.length > 0
     ) {
-      setFilterData(filterByPrice);
-    }
-
-    if (
+      finalData = filterByPrice;
+    } else if (
       selectedCategory.length === 0 &&
       selectedType.length > 0 &&
       selectedRange.length > 0
     ) {
-      setFilterData(filterTypeByPrice);
+      finalData = filterTypeByPrice;
     }
+
+    setFilterData(finalData);
 
     // const filter = products?.filter(
     //   (itm) =>
@@ -191,10 +184,7 @@ function ShopAll() {
   }, [selectedCategory, selectedType, selectedRange]);
 
   useEffect(() => {
-    const getFilterData = JSON.parse(localStorage.getItem("filterData")) || [];
-    console.log(getFilterData, "getFilterData");
-
-    setFilterData(getFilterData);
+    setFilterData(products);
   }, []);
 
   return (
