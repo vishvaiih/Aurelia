@@ -3,7 +3,12 @@ import { Box, Typography } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import { categories, productTypes } from "../Database/Database";
 
-function Categories({selectedCategory,setSelectedCategory}) {
+function Categories({
+  setSelectedCategory,
+  selectedCategory,
+  setSelectedType,
+  selectedType,
+}) {
   const priceRange = [
     " Under $500",
     "$500 - $1,000",
@@ -11,7 +16,11 @@ function Categories({selectedCategory,setSelectedCategory}) {
     "Over $3,000",
   ];
 
-  
+  const handleChange = (name, type) => {
+    console.log(name, "name");
+    setSelectedCategory((prev) => [...prev, name]);
+    setSelectedType((prev) => [...prev, type]);
+  };
 
   const label = { slotProps: { input: { "aria-label": "Checkbox demo" } } };
   return (
@@ -20,11 +29,12 @@ function Categories({selectedCategory,setSelectedCategory}) {
         <Typography sx={{ fontFamily: "serif" }}>Category</Typography>
 
         {categories.map((itm) => (
-          <Box  key = {itm.id}  sx={{ display: "flex", alignItems: "center" }}>
+          <Box key={itm.id} sx={{ display: "flex", alignItems: "center" }}>
             <Checkbox
-          
-            {...label} 
-            style={{ color: "#d9a520" }} />
+              onChange={() => handleChange(itm.name)}
+              {...label}
+              style={{ color: "#d9a520" }}
+            />
             <Typography
               sx={{
                 color: "#413d39",
@@ -42,8 +52,12 @@ function Categories({selectedCategory,setSelectedCategory}) {
         <Typography sx={{ fontFamily: "serif" }}>Product Type </Typography>
 
         {productTypes.map((itm) => (
-          <Box  key = {itm.id} sx={{ display: "flex", alignItems: "center" }}>
-            <Checkbox checked={itm} {...label} style={{ color: "#d9a520" }} />
+          <Box key={itm.id} sx={{ display: "flex", alignItems: "center" }}>
+            <Checkbox
+              onChange={() => handleChange(itm.type)}
+              {...label}
+              style={{ color: "#d9a520" }}
+            />
             <Typography
               sx={{
                 color: "#413d39",
@@ -61,7 +75,7 @@ function Categories({selectedCategory,setSelectedCategory}) {
         <Typography sx={{ fontFamily: "serif" }}>Price Range</Typography>
 
         {priceRange.map((itm) => (
-          <Box key={itm.id}  sx={{ display: "flex", alignItems: "center" }}>
+          <Box key={itm.id} sx={{ display: "flex", alignItems: "center" }}>
             <Checkbox {...label} style={{ color: "#d9a520" }} />
             <Typography
               sx={{

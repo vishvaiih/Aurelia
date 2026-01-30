@@ -6,11 +6,31 @@ import AllJewelry from "../Components/AllJewelry";
 import Filters from "../Components/Filters";
 import ProductList from "../Components/ProductList";
 import Categories from "../Components/Categories";
+import { products } from "../Database/Database";
 
 function ShopAll() {
+  const [selectedCategory, setSelectedCategory] = useState([]);
+  const [selectedType,setSelectedType] = useState([]);
 
-  const [selectedCategory,setSelectedCategory] = useState([]);
+  const [filterData,setFilterData] =  useState([]);
 
+  useEffect(() => {
+
+    if(selectedCategory.length == 0){
+      setFilterData(products);
+      return;
+    }
+
+    const filter = products?.filter((itm) =>
+      selectedCategory.some((category) => category.toLowerCase() === itm.category.toLowerCase())
+    );
+    console.log("filter", filter);
+
+    setFilterData(filter)
+
+  }, [selectedCategory]);
+
+  console.log("selectedCategory", selectedCategory);
 
   return (
     <>
@@ -28,9 +48,14 @@ function ShopAll() {
         <Filters />
 
         <Box sx={{ display: "flex" }}>
-          <Categories  selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />
+          <Categories
+            selectedCategory={selectedCategory}
+            setSelectedCategory={setSelectedCategory}
+            setSelectedType={setSelectedType}
+            selectedType={selectedType}
+          />
 
-          <ProductList />
+          <ProductList  products={filterData} />
         </Box>
       </Box>
 

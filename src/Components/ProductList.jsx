@@ -8,7 +8,7 @@ import { products } from "../Database/Database";
 
 import SingleProduct from "./SingleProduct";
 
-function ProductList() {
+function ProductList({products}) {
   return (
     <Box sx={{ width: "100%" }}>
       <Grid
