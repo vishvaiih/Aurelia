@@ -16,35 +16,141 @@ function ShopAll() {
   const [filterData, setFilterData] = useState([]);
 
   useEffect(() => {
-    if (selectedCategory.length == 0 && selectedType.length == 0 && selectedRange.length == 0) {
+    if (
+      selectedCategory.length == 0 &&
+      selectedType.length == 0 &&
+      selectedRange.length == 0
+    ) {
       setFilterData(products);
       return;
     }
 
-    const filterCategory = products?.filter((itm) => selectedCategory.some((category) => category?.toLowerCase() === itm?.category?.toLowerCase()))
+    const filterCategory = products?.filter((itm) =>
+      selectedCategory.some(
+        (category) => category?.toLowerCase() === itm?.category?.toLowerCase()
+      )
+    );
 
-    const  filterType = filterCategory?.filter((itm) => selectedType.some((type) => type?.toLowerCase() === itm?.type?.toLowerCase()))
+    const filterTypeByFilterCategory = filterCategory?.filter((itm) =>
+      selectedType.some(
+        (type) => type?.toLowerCase() === itm?.type?.toLowerCase()
+      )
+    );
 
-    const filterByPrice =  filterType?.filter((itm) => selectedRange.some((p) => {
-            const price = p.trim().toLowerCase();
+    const filterType = products?.filter((itm) =>
+      selectedType.some(
+        (type) => type?.toLowerCase() === itm?.type?.toLowerCase()
+      )
+    );
 
-            if (price === "Under $500") {
-              return itm.price <= 500;
-            }
-            if (price === "$500 - $1,000") {
-              return itm.price > 500 && itm.price < 1000;
-            }
-            if (price === "$1,000 - $3,000") {
-              return itm.price > 1000 && itm.price < 3000;
-            }
-            if (price === "Over $3,000") {
-              return itm.price > 3000;
-            }
-          }) )
+    const filterCategoryByprice = filterCategory?.filter((itm) =>
+      selectedRange.some((p) => {
+        const price = p.trim().toLowerCase();
+
+        if (price === "Under $500") {
+          return itm.price <= 500;
+        }
+        if (price === "$500 - $1,000") {
+          return itm.price > 500 && itm.price < 1000;
+        }
+        if (price === "$1,000 - $3,000") {
+          return itm.price > 1000 && itm.price < 3000;
+        }
+        if (price === "Over $3,000") {
+          return itm.price > 3000;
+        }
+      })
+    );
+
+    const filterByPrice = filterTypeByFilterCategory?.filter((itm) =>
+      selectedRange.some((p) => {
+        const price = p.trim().toLowerCase();
+
+        if (price === "Under $500") {
+          return itm.price <= 500;
+        }
+        if (price === "$500 - $1,000") {
+          return itm.price > 500 && itm.price < 1000;
+        }
+        if (price === "$1,000 - $3,000") {
+          return itm.price > 1000 && itm.price < 3000;
+        }
+        if (price === "Over $3,000") {
+          return itm.price > 3000;
+        }
+      })
+    );
+
+    const filterTypeByPrice = filterType?.filter((itm) =>
+      selectedRange.some((p) => {
+        const price = p.trim().toLowerCase();
+
+        if (price === "Under $500") {
+          return itm.price <= 500;
+        }
+        if (price === "$500 - $1,000") {
+          return itm.price > 500 && itm.price < 1000;
+        }
+        if (price === "$1,000 - $3,000") {
+          return itm.price > 1000 && itm.price < 3000;
+        }
+        if (price === "Over $3,000") {
+          return itm.price > 3000;
+        }
+      })
+    );
+
+    if (
+      selectedCategory.length > 0 &&
+      selectedType.length === 0 &&
+      selectedRange.length === 0
+    ) {
+      setFilterData(filterCategory);
+    }
+
+    if (
+      selectedCategory.length === 0 &&
+      selectedType.length > 0 &&
+      selectedRange.length === 0
+    ) {
+      setFilterData(filterType);
+    }
+
+    if (
+      selectedCategory.length > 0 &&
+      selectedType.length > 0 &&
+      selectedRange.length === 0
+    ) {
+      setFilterData(filterTypeByFilterCategory);
+    }
+
+    if (
+      selectedCategory.length > 0 &&
+      selectedType.length === 0 &&
+      selectedRange.length > 0
+    ) {
+      setFilterData(filterCategoryByprice);
+    }
+
+    if (
+      selectedCategory.length > 0 &&
+      selectedType.length > 0 &&
+      selectedRange.length > 0
+    ) {
+      setFilterData(filterByPrice);
+    }
+
+    if (
+      selectedCategory.length === 0 &&
+      selectedType.length > 0 &&
+      selectedRange.length > 0
+    ) {
+      setFilterData(filterTypeByPrice);
+    }
 
     // const filter = products?.filter(
     //   (itm) =>
-      
+
     //     selectedCategory.some(
     //       (category) => category?.toLowerCase() === itm?.category?.toLowerCase()
     //     ) ||
@@ -70,22 +176,26 @@ function ShopAll() {
     //       }
     //     })
     // );
-    console.log("filterCategory", filterCategory);
-    console.log("filterType",filterType);
-    console.log()
+    // console.log("filterCategory", filterCategory);
+    // console.log("filterTypeByFilterCategory", filterTypeByFilterCategory);
+    // console.log("filterType", filterType);
+
+    // console.log("filterCategoryByprice", filterCategoryByprice);
+    // console.log("filterByPrice", filterByPrice);
+
+    // console.log("filterTypeByPrice", filterTypeByPrice);
 
     // setFilterData(filter);
 
     // localStorage.setItem("filterData",JSON.stringify(filter));
-  }, [selectedCategory, selectedType,selectedRange]);
+  }, [selectedCategory, selectedType, selectedRange]);
 
- useEffect(() => {
-      const getFilterData = JSON.parse(localStorage.getItem("filterData")) || [];
-      console.log(getFilterData,"getFilterData")
+  useEffect(() => {
+    const getFilterData = JSON.parse(localStorage.getItem("filterData")) || [];
+    console.log(getFilterData, "getFilterData");
 
-      setFilterData(getFilterData);
-
- },[]);
+    setFilterData(getFilterData);
+  }, []);
 
   return (
     <>
