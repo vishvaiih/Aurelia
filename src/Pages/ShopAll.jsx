@@ -13,6 +13,8 @@ function ShopAll() {
   const [selectedType, setSelectedType] = useState([]);
   const [selectedRange, setSelectedRange] = useState([]);
 
+  // const [Item,setItem] = useState([]);
+
   const [filterData, setFilterData] = useState([]);
 
   useEffect(() => {
@@ -45,6 +47,18 @@ function ShopAll() {
       )
     );
 
+    
+    // if(filterCategory.length > 0 &&  filterTypeByFilterCategory.length === 0 && filterType.length === 0 && products.length === 0 ){
+    //   setItem(filterCategory);
+    // }else if(filterCategory.length === 0 &&  filterTypeByFilterCategory.length > 0 && filterType.length === 0 && products.length === 0){
+    //   setItem(filterTypeByFilterCategory);
+    // }else if(filterCategory.length === 0 &&  filterTypeByFilterCategory.length === 0 && filterType.length > 0 && products.length === 0){
+    //   setItem(filterType);
+    // }else if(filterCategory.length === 0 &&  filterTypeByFilterCategory.length === 0 && filterType.length === 0 && products.length > 0){
+    //   setItem(products);
+    // }
+    
+    
     const filterCategoryByprice = filterCategory?.filter((itm) =>
       selectedRange.some((p) => {
         const price = p.trim().toLowerCase();
@@ -118,8 +132,7 @@ function ShopAll() {
         if (price === "over $3,000") {
           return itm.price > 3000;
         }
-      })
-    
+      })  
     )
 
     if (
