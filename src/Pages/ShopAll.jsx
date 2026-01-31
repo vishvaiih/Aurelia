@@ -13,14 +13,11 @@ function ShopAll() {
   const [selectedType, setSelectedType] = useState([]);
   const [selectedRange, setSelectedRange] = useState([]);
 
-  // const [Item,setItem] = useState([]);
-
   const [filterData, setFilterData] = useState([]);
 
   useEffect(() => {
     let finalData = products;
     if (
-
       selectedCategory.length == 0 &&
       selectedType.length == 0 &&
       selectedRange.length == 0
@@ -47,20 +44,8 @@ function ShopAll() {
       )
     );
 
-    
-    // if(filterCategory.length > 0 &&  filterTypeByFilterCategory.length === 0 && filterType.length === 0 && products.length === 0 ){
-    //   setItem(filterCategory);
-    // }else if(filterCategory.length === 0 &&  filterTypeByFilterCategory.length > 0 && filterType.length === 0 && products.length === 0){
-    //   setItem(filterTypeByFilterCategory);
-    // }else if(filterCategory.length === 0 &&  filterTypeByFilterCategory.length === 0 && filterType.length > 0 && products.length === 0){
-    //   setItem(filterType);
-    // }else if(filterCategory.length === 0 &&  filterTypeByFilterCategory.length === 0 && filterType.length === 0 && products.length > 0){
-    //   setItem(products);
-    // }
-    
-    
-    const filterCategoryByprice = filterCategory?.filter((itm) =>
-      selectedRange.some((p) => {
+    const commonprice = (itm) => {
+      return selectedRange.some((p) => {
         const price = p.trim().toLowerCase();
 
         if (price === "under $500") {
@@ -75,65 +60,92 @@ function ShopAll() {
         if (price === "over $3,000") {
           return itm.price > 3000;
         }
-      })
-    );
+      });
+    };
 
-    const filterByPrice = filterTypeByFilterCategory?.filter((itm) =>
-      selectedRange.some((p) => {
-        const price = p.trim().toLowerCase();
+    const filterCategoryByprice = filterCategory?.filter(commonprice);
 
-        if (price === "under $500") {
-          return itm.price <= 500;
-        }
-        if (price === "$500 - $1,000") {
-          return itm.price > 500 && itm.price < 1000;
-        }
-        if (price === "$1,000 - $3,000") {
-          return itm.price > 1000 && itm.price < 3000;
-        }
-        if (price === "over $3,000") {
-          return itm.price > 3000;
-        }
-      })
-    );
+    const filterByPrice = filterTypeByFilterCategory?.filter(commonprice);
 
-    const filterTypeByPrice = filterType?.filter((itm) =>
-      selectedRange.some((p) => {
-        const price = p.trim().toLowerCase();
+    const filterTypeByPrice = filterType?.filter(commonprice);
 
-        if (price === "under $500") {
-          return itm.price <= 500;
-        }
-        if (price === "$500 - $1,000") {
-          return itm.price > 500 && itm.price < 1000;
-        }
-        if (price === "$1,000 - $3,000") {
-          return itm.price > 1000 && itm.price < 3000;
-        }
-        if (price === "over $3,000") {
-          return itm.price > 3000;
-        }
-      })
-    );
+    const filterByPriceOnly = products?.filter(commonprice);
 
-    const filterByPriceOnly = products?.filter((itm) => 
-      selectedRange.some((p) => {
-        const price = p.trim().toLowerCase();
+    // const filterCategoryByprice = filterCategory?.filter((itm) =>
+    //   selectedRange.some((p) => {
+    //     const price = p.trim().toLowerCase();
 
-        if (price === "under $500") {
-          return itm.price <= 500;
-        }
-        if (price === "$500 - $1,000") {
-          return itm.price > 500 && itm.price < 1000;
-        }
-        if (price === "$1,000 - $3,000") {
-          return itm.price > 1000 && itm.price < 3000;
-        }
-        if (price === "over $3,000") {
-          return itm.price > 3000;
-        }
-      })  
-    )
+    //     if (price === "under $500") {
+    //       return itm.price <= 500;
+    //     }
+    //     if (price === "$500 - $1,000") {
+    //       return itm.price > 500 && itm.price < 1000;
+    //     }
+    //     if (price === "$1,000 - $3,000") {
+    //       return itm.price > 1000 && itm.price < 3000;
+    //     }
+    //     if (price === "over $3,000") {
+    //       return itm.price > 3000;
+    //     }
+    //   })
+    // );
+
+    // const filterByPrice = filterTypeByFilterCategory?.filter((itm) =>
+    //   selectedRange.some((p) => {
+    //     const price = p.trim().toLowerCase();
+
+    //     if (price === "under $500") {
+    //       return itm.price <= 500;
+    //     }
+    //     if (price === "$500 - $1,000") {
+    //       return itm.price > 500 && itm.price < 1000;
+    //     }
+    //     if (price === "$1,000 - $3,000") {
+    //       return itm.price > 1000 && itm.price < 3000;
+    //     }
+    //     if (price === "over $3,000") {
+    //       return itm.price > 3000;
+    //     }
+    //   })
+    // );
+
+    // const filterTypeByPrice = filterType?.filter((itm) =>
+    //   selectedRange.some((p) => {
+    //     const price = p.trim().toLowerCase();
+
+    //     if (price === "under $500") {
+    //       return itm.price <= 500;
+    //     }
+    //     if (price === "$500 - $1,000") {
+    //       return itm.price > 500 && itm.price < 1000;
+    //     }
+    //     if (price === "$1,000 - $3,000") {
+    //       return itm.price > 1000 && itm.price < 3000;
+    //     }
+    //     if (price === "over $3,000") {
+    //       return itm.price > 3000;
+    //     }
+    //   })
+    // );
+
+    // const filterByPriceOnly = products?.filter((itm) =>
+    //   selectedRange.some((p) => {
+    //     const price = p.trim().toLowerCase();
+
+    //     if (price === "under $500") {
+    //       return itm.price <= 500;
+    //     }
+    //     if (price === "$500 - $1,000") {
+    //       return itm.price > 500 && itm.price < 1000;
+    //     }
+    //     if (price === "$1,000 - $3,000") {
+    //       return itm.price > 1000 && itm.price < 3000;
+    //     }
+    //     if (price === "over $3,000") {
+    //       return itm.price > 3000;
+    //     }
+    //   })
+    // );
 
     if (
       selectedCategory.length > 0 &&
@@ -171,11 +183,11 @@ function ShopAll() {
       selectedRange.length > 0
     ) {
       finalData = filterTypeByPrice;
-    }else if(
+    } else if (
       selectedCategory.length === 0 &&
       selectedType.length === 0 &&
       selectedRange.length > 0
-    ){
+    ) {
       finalData = filterByPriceOnly;
     }
 
