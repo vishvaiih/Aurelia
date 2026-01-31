@@ -4,6 +4,7 @@ import { ShoppingBag } from "lucide-react";
 
 import Checkbox from "@mui/material/Checkbox";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
+
 import Favorite from "@mui/icons-material/Favorite";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../UseContext/UseContext";
@@ -18,25 +19,25 @@ function SingleProduct({ itm }) {
   return (
     <Box sx={{ minHeight: "50vh", width: "23%", marginTop: "10px" }}>
       <Box sx={{ position: "relative" }}>
-         {itm?.bestseller === true && (
-                    <>
-                      <Button
-                        sx={{
-                          position: "absolute",
-                          top: "10px",
-                          left: "10px",
-                          color: "#25221e",
-                          backgroundColor: "#d7b04b",
-                          textTransform: "capitalize",
-                          borderRadius: "20px",
-                          padding: "2px 10px",
-                          fontSize: "13px",
-                        }}
-                      >
-                        BestSeller
-                      </Button>
-                    </>
-                  )}
+        {itm?.bestseller === true && (
+          <>
+            <Button
+              sx={{
+                position: "absolute",
+                top: "10px",
+                left: "10px",
+                color: "#25221e",
+                backgroundColor: "#d7b04b",
+                textTransform: "capitalize",
+                borderRadius: "20px",
+                padding: "2px 10px",
+                fontSize: "13px",
+              }}
+            >
+              BestSeller
+            </Button>
+          </>
+        )}
         <img
           src={itm.image}
           onClick={() => navigation(`/shop/${itm.id}`)}
@@ -45,9 +46,8 @@ function SingleProduct({ itm }) {
             borderRadius: "15px",
             width: "100%",
             objectFit: "cover",
-            cursor:"pointer"
+            cursor: "pointer",
           }}
-          
         />
 
         {/* Button on Image */}

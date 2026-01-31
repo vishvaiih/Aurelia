@@ -18,6 +18,7 @@ function ShopAll() {
   useEffect(() => {
     let finalData = products;
     if (
+
       selectedCategory.length == 0 &&
       selectedType.length == 0 &&
       selectedRange.length == 0
@@ -101,6 +102,26 @@ function ShopAll() {
       })
     );
 
+    const filterByPriceOnly = products?.filter((itm) => 
+      selectedRange.some((p) => {
+        const price = p.trim().toLowerCase();
+
+        if (price === "under $500") {
+          return itm.price <= 500;
+        }
+        if (price === "$500 - $1,000") {
+          return itm.price > 500 && itm.price < 1000;
+        }
+        if (price === "$1,000 - $3,000") {
+          return itm.price > 1000 && itm.price < 3000;
+        }
+        if (price === "over $3,000") {
+          return itm.price > 3000;
+        }
+      })
+    
+    )
+
     if (
       selectedCategory.length > 0 &&
       selectedType.length === 0 &&
@@ -137,6 +158,12 @@ function ShopAll() {
       selectedRange.length > 0
     ) {
       finalData = filterTypeByPrice;
+    }else if(
+      selectedCategory.length === 0 &&
+      selectedType.length === 0 &&
+      selectedRange.length > 0
+    ){
+      finalData = filterByPriceOnly;
     }
 
     setFilterData(finalData);
