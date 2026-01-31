@@ -27,10 +27,12 @@ function ShopAll() {
     }
 
     const filterCategory = products?.filter((itm) =>
-      selectedCategory.some(
-        (category) => category?.toLowerCase() === itm?.category?.toLowerCase()
+      selectedCategory.filter(
+        (category) => itm?.category?.toLowerCase().includes(category.toLowerCase())
       )
     );
+
+
 
     const filterTypeByFilterCategory = filterCategory?.filter((itm) =>
       selectedType.some(
@@ -221,7 +223,7 @@ function ShopAll() {
     //       }
     //     })
     // );
-    // console.log("filterCategory", filterCategory);
+    console.log("filterCategory", filterCategory);
     // console.log("filterTypeByFilterCategory", filterTypeByFilterCategory);
     // console.log("filterType", filterType);
 
